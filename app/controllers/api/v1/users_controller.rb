@@ -1,6 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authorize_request, except: %i[create]
-  before_action :find_user, except: %i[create index]
+ 
 
   ALLOWED_DATA = %i[name email password password_confirmation role].freeze
 
