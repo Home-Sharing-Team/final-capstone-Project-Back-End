@@ -48,8 +48,9 @@ This project was built using these technologies.
 * Rubocop
 * Rails
 * Css
-*capibara
-
+* Capibara
+* Devise
+* CanCanCan
 
 <!-- INSTALLATION -->
 ## Usage
