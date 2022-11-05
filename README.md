@@ -86,7 +86,7 @@ B) In the navbar I can see a button or link to “Become a Host”. If I click t
 C) In the navbar I can see also buttons or links to sign up, log in, and log out.
 
 D) In the navbar I can see a button to show the list of all uploaded properties for the logged user.
-In each item in this list, I can see a button for updating information and a button for deleting the property from the list.
+In each item in this list (indicated only by property title), I can see a button for updating information and a button for deleting the property from the list.
 
 E) In the navbar I can see a button to show the list of all the reservations created by the logged user, with name of the property, reservation Id or code, and a button to update and a button to delete it.
 
