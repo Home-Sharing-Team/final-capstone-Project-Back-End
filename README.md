@@ -46,7 +46,7 @@ Final Capstone Project Back-End production
 
 The project requirements ar acoording to the following User stories:
 
-# A) When I go to the home page:
+A) When I go to the home page:
 1. I can see a selection of the latest properties to rent on the home page, with 1 photo, property title, country, city,  and the rate per cycle. Also, inside a parenthesis, must be the minimum_cycle_amount.
 2. If I click on a photo or property title, I can see:
 - The property title,
@@ -77,17 +77,19 @@ The project requirements ar acoording to the following User stories:
 14. After successful sing up or log in, the page opens again the reservation page with the reservation information (user name, property title, check_in and checkout dates, total amount to pay). It shows also a confirmation message with the reservation code or ID and telling the user that an email will be sent to her/his email address with instructions for paying the reservation.
 15. If th user was already logged in, the sign up or log in is skiped.
 
-# B) In the navbar I can see a button or link to “Become a Host”. If I click this button I will see:
+B) In the navbar I can see a button or link to “Become a Host”. If I click this button I will see:
 - The page for sign up (with name, email, password) or log in (with email and password).
 - After successful sing up or log in, I can see a form to upload all information and photos for a new property (see A.2).
 - If the user was already logged in, the “Become a Host” button takes the user directly to the form, without requesting sig uo or log in.
 - After entering the new property info, the page shows the homepage and a message with: “Thank you for uploading your property”.
 
-# C) In the navbar I can see also buttons or links to sign up, log in, and log out.
+C) In the navbar I can see also buttons or links to sign up, log in, and log out.
 
 ## Entity Relation Diagram:
 
-![Alt text](../../../../../../../C:/Users/Dario/Documents/MICROVERSE/final_capstone/final-capstone-Project-Back-End/images/ERD.jpeg)
+![ERD](../../../../../../../C:/Users/Dario/Documents/MICROVERSE/final_capstone/final-capstone-Project-Back-End/images/ERD.jpeg)
+
+
 
 ### Built With
 This project was built using these technologies.
