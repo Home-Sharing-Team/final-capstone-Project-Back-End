@@ -74,21 +74,21 @@ A) When I go to the home page:
 11. If there is availability, the page also shows the total amount to pay for the reservation.
 12. If there is availability, the page also shows a “Reserve” button.
 13. If I click the “Reserve” button, that takes the user to a page for sign up (with name, email, password) or log in (with email and password).
-14. After successful sing up or log in, the page opens again the reservation page with the reservation information (user name, property title, check_in and checkout dates, total amount to pay). It shows also a confirmation message with the reservation code or ID and telling the user that an email will be sent to her/his email address with instructions for paying the reservation.
+14. After successful sing up or log in, the page opens again the reservation page with the reservation information (user name, property title, check_in and checkout dates, total amount to pay). It shows also a confirmation message with the reservation ID and telling the user that an email will be sent to her/his email address with instructions for paying the reservation.
 15. If th user was already logged in, the sign up or log in is skiped.
 
 B) In the navbar I can see a button or link to “Become a Host”. If I click this button I will see:
 - The page for sign up (with name, email, password) or log in (with email and password).
 - After successful sing up or log in, I can see a form to upload all information and photos for a new property (see A.2).
-- If the user was already logged in, the “Become a Host” button takes the user directly to the form, without requesting sig uo or log in.
+- If the user was already logged in, the “Become a Host” button takes the user directly to the form, without requesting sign up or log in.
 - After entering the new property info, the page shows the homepage and a message with: “Thank you for uploading your property”.
 
 C) In the navbar I can see also buttons or links to sign up, log in, and log out.
 
-D) In the navbar I can see a button to show the list of all uploaded properties for the logged user.
+D) In the navbar I can see a button to show the list of all uploaded properties for the logged in user.
 In each item in this list (indicated only by property title), I can see a button for updating information and a button for deleting the property from the list.
 
-E) In the navbar I can see a button to show the list of all the reservations created by the logged user, with name of the property, reservation Id or code, and a button to update and a button to delete it.
+E) In the navbar I can see a button to show the list of all the reservations created by the logged in user, with name of the property, reservation Id, and a button to update and a button to delete it.
 
 ## Entity Relation Diagram:
 
