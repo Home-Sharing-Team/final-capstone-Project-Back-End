@@ -66,7 +66,7 @@ A) When I go to the home page:
 3. I can also see a select button to select a country to show properties for that country only.
 4. After selecting a country, I can see a title indicating the selected country, and the list of properties for that country with 1 photo, property title, country, city,  and the rate per cycle.  Also, inside a parenthesis, must be the minimum_cycle_amount.
 5. After click in one photo or property title, I can see all I can see in A.2. But the button or link to go back must take me to the country list page.
-6. When I click the reservation button, I can see the fields to enter check_in and checkout dates. Optionally, I can see a calendar that shows 12 month in advance, with indicated available dates higlited.
+6. When I click the reservation button, I can see the fields to enter check_in and checkout dates, and also a field to enter the number of guest that will stay in the property (the enter number of guest must be greater than 0 and smaller or equal to the guest capacity of the property). Optionally, I can see a calendar that shows 12 month in advance, with indicated available dates higlited.
 7. I can see a “Check dates” button to check if the requested reservation period is available.
 8. After click in this button, I can see the messages: “The property is available for your requested dates” or “Sorry, the property is not available for your requested dates. Please try a different time period”.
 9. If there isn’t availability, I can enter different dates to start a new check with the Check dates button.
