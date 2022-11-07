@@ -93,7 +93,7 @@ E) In the navbar I can see a button to show the list of all the reservations cre
 
 ## Entity Relation Diagram:
 
-![ERD](../../../../../../../C:/Users/Dario/Documents/MICROVERSE/final_capstone/final-capstone-Project-Back-End/images/ERD.jpeg)
+./images/ERD.jpeg
 
 
 
