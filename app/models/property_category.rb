@@ -1,4 +1,4 @@
 class PropertyCategory < ApplicationRecord
-  belongs_to :category
+  has_many :categories, dependent: :destroy
   belongs_to :property
 end
