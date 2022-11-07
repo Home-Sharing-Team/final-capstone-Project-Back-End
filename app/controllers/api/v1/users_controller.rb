@@ -4,16 +4,16 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: @users, status: :ok
+    render json: {success: true, data: @users}, status: 200
   end
 
   def show
-    render json: @user, status: :ok
+    render json: {success: true, data: @user}, status: 200
   end
 
   def create
     data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) && allow != :role }
-    return render json: { error: 'Cant create user Admin' }, status: :unprocessable_entity if data.empty?
+    return render json: { error: 'Cant create user because of role' }, status: 201 if data.empty?
 
     user = User.new(data)
     if user.save
