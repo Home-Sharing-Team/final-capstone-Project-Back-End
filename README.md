@@ -93,7 +93,7 @@ E) In the navbar I can see a button to show the list of all the reservations cre
 
 ## Entity Relation Diagram:
 
-![ERD](https://github.com/[Home-Sharing-Team]/[final-capstone-Project-Back-End]/blob/[Users]/ERD.jpeg?raw=true)
+![ERD](https://github.com/[Home-Sharing-Team]/[final-capstone-Project-Back-End]/blob/[Users]images/ERD.jpeg?raw=true)
 
 
 
