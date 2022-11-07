@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/David-Verde/final-capstone-Project-Back-End">
- <img src="/images/logo.jpg" alt="Logo" width="80" height="80">
+ <img src="/images/Home-Sharing-Project.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Ruby on Rails --> [final-capstone-Project-Back-End-App]</h3>
