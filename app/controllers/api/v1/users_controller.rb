@@ -13,13 +13,13 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) && allow != :role }
-    return render json: { error: 'Cant create user because of role' }, status: 201 if data.empty?
+    return render json: { success: false, error: 'Can not create user without all the requested information' }, status: 400 if data.empty?
 
     user = User.new(data)
     if user.save
-      render json:  {success: true, data: user}, status: :created
+      render json:  {success: true, data: user}, status: 201
     else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+      render json: { success: false, error: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
