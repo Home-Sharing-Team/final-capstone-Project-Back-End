@@ -94,7 +94,7 @@ E) In the navbar I can see a button to show the list of all the reservations cre
 
 ## Entity Relation Diagram:
 
-<img src="/images/ERD.jpeg" alt="Logo" width="500" height="500">
+<img src="/images/ERD.jpeg" alt="Logo" width="800" height="500">
   </a>
 
 
