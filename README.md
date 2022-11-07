@@ -82,12 +82,16 @@ B) In the navbar I can see a button or link to “Become a Host”. If I click t
 - The page for signing up (with name, email, and password) or logging in (with email and password).
 - After successfully sing up or logging in, I can see a form to upload all information and photos for a new property (see A.2).
 - If the user was already logged in, the “Become a Host” button takes the user directly to the form, without requesting sign up or log in.
-- After entering the new property info, the page shows the homepage and a message with: “Thank you for uploading your property”.
+- After entering the new property info, the page shows the homepage and a message with: “Thank you for uploading your property”. 
 
 C) In the navbar I can see also buttons or links to sign up, log in, and log out.
 
-D) In the navbar I can see a button to show the list of all uploaded properties for the logged-in user.
-In each item in this list (indicated only by property title), I can see a button for updating information and a button for deleting the property from the list.
+D) In the navbar I can see a button to show the list of all uploaded properties for the logged-in user. After clicking this button, the page shows the list of proprties names uploaded by the logged in user. Each name is a link to the show page of the property. If a name is clicked, the page will show:
+- The name of the property,
+- A button for updating general information,
+- A button for deleting the property from the list,
+- And a "Block periods" button for creating blocked periods.
+- If the "Block periods" button is clicked, the page shows a form with tow input fields to enter start and end dates for the block period, and a button to save the new blocked period. After saving the blocked period, the page shows again the list of uploaded properties for this user, which contains a button to navigate to homepage.
 
 E) In the navbar I can see a button to show the list of all the reservations created by the logged-in user, with the name of the property, reservation Id, and a button to update and a button to delete it.
 
