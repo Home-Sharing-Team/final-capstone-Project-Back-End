@@ -14,6 +14,7 @@ class ApplicationController < ActionController::API
       return render json: { success: false, error: "Invalid token!" }, status: :unauthorized if curr_time > @decoded[:exp]
 
       @current_user = User.find(@decoded[:user_id])
+      @current_user.password_digest = nil
     rescue ActiveRecord::RecordNotFound => error
       render json: { success: false, error: }, status: :unauthorized
     rescue JWT::DecodeError => error
