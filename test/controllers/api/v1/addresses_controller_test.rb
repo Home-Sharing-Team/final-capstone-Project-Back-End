@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PropertyCategoryTest < ActiveSupport::TestCase
+class Api::V1::AddressesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

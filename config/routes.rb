@@ -4,8 +4,12 @@ Rails.application.routes.draw do
       resources :users, only: %i[index show create update destroy]
       post 'auth/sign_in', to: 'authentication#sign_in'
       get 'auth/me', to: 'authentication#getCurrentUser'
+      resources :properties, only: %i[index show create update destroy]
+      resources :addresses, only: %i[index show create update destroy delete]
     end
   end
+
+  
 end
 
 

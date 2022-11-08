@@ -12,7 +12,7 @@ class Ability
       can :read, :all
     end
   end
-end
+
 
     # Define abilities for the user here. For example:
     #
@@ -38,5 +38,5 @@ end
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
-  end
+
 end

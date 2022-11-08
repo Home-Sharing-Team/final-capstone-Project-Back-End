@@ -1,6 +1,7 @@
 require 'jwt'
 
-module JwtToken extend ActiveSupport::Concern
+module JwtToken
+  extend ActiveSupport::Concern
   SECRET_KEY = Rails.application.secrets.access_token_key.to_s || 'this is a demo key'
 
   def self.sign(payload, exp = 1.days.from_now)

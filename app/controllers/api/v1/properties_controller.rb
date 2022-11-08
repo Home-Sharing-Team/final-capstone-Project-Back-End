@@ -1,55 +1,54 @@
 class Api::V1::PropertiesController < ApplicationController
-# before_action :authorize_request
-before_action :find_property, except: %i[create index]
+  # before_action :authorize_request
+  before_action :find_property, except: %i[create index]
 
-ALLOWED_DATA = %i[name address city state zip price description user_id].freeze
+  ALLOWED_DATA = %i[name description guest_capacity bedrooms beds bathrooms size user_id address_id].freeze
 
-def index
+  def index
     @properties = Property.all
-    render json: {success: true, data: @properties}, status: :ok
-rescue ActiveRecord::RecordNotFound
+    render json: { success: true, data: @properties }, status: :ok
+  rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Properties not found' }, status: :not_found
-end
+  end
 
-def show
-    render json: {success: true, data: @property}, status: :ok
-rescue ActiveRecord::RecordNotFound
+  def show
+    render json: { success: true, data: @property }, status: :ok
+  rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Property not found' }, status: :not_found
-end 
+  end
 
-def create
-    data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
-    return render json: { success: false, error: 'Can not create property without all the requested information' }, status: :bad_request if data.empty?
-
-    property = Property.new(data)
+  def create
+    property = Property.new(create_params)
     if property.save
-        render json:  {success: true, data: property}, status: 201
+      render json: { success: true, data: property }, status: 201
     else
-        render json: { success: false, error: 'Cannot save property' }, status: :bad_request
+      render json: { success: false, error: 'Cannot save property' }, status: :bad_request
     end
+  end
 
-    def update
-        data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
-        return render json: {success: false, error: 'Cant update property' }, status: :unprocessable_entity if data.empty?
-
-        if @property.update(data)
-            render json: {success: true, data: @property}, status: :bad_request
-        else
-            render json: { success: false, errors: 'Cannot update property' }, status: :unprocessable_entity
-        end
+  def update
+    if @property.update
+      render json: { success: true, data: @property }, status: :bad_request
+    else
+      render json: { success: false, errors: 'Cannot update property' }, status: :unprocessable_entity
     end
+  end
 
-    def destroy
-        can? :destroy, @property
-        @property.destroy
-        render json: {success: true, data: @property}, status: :ok
-    end
+  def destroy
+    #can? :destroy, @property
+    @property.destroy
+    render json: { success: true, data: @property }, status: :ok
+  end
 
-    private
+  private
 
-    def find_property
-        @property = Property.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-        render json: { success: false, error: 'Property not found' }, status: :not_found
-    end
+  def find_property
+    @property = Property.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Property not found' }, status: :not_found
+  end
+
+  def create_params
+    params.permit(ALLOWED_DATA)
+  end
 end

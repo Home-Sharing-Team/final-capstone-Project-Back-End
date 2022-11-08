@@ -8,3 +8,6 @@
 User.create(name: 'David', email: 'david@gmail.com', password: '123456', password_confirmation: '123456')
 User.create(name: 'Dario', email: 'dario@gmail.com', password: '123456', password_confirmation: '123456')
 User.create(name: 'Gabriel', email: 'gabriel@gmail.com', password: '123456', password_confirmation: '123456', role: 1)
+Address.create(street: 'Calle 1', city: 'Bogota', country: 'Colombia', zip_code: '111111', number: 1)
+Address.create(street: 'Calle 2', city: 'Taiwan', country: 'China', zip_code: '111111', number: 2)
+Property.create(name: 'Casa 1', description: 'Casa 1', guest_capacity: 1, bedrooms: 1, beds: 1, bathrooms: 1, kind: 'apartment', address_id: 1, size: 1, user_id: 1)
