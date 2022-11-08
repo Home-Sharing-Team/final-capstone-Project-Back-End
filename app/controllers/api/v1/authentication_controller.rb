@@ -5,7 +5,7 @@ class Api::V1::AuthenticationController < ApplicationController
         user = User.find_by(email: params[:email])
         if user&.authenticate(params[:password])
             user.password_digest = nil
-            token = JwtToken.sign(user_id: user.id)
+            token = JwtToken.sign({ user_id: user.id })
             render json: { 
                 success: true, 
                 data: { 
