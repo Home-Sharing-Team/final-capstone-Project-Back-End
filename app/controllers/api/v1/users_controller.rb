@@ -19,31 +19,31 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json:  {success: true, data: user}, status: 201
     else
-      render json: { success: false, error: user.errors.full_messages }, status: :unprocessable_entity
+      render json: { success: false, error: 'Cannot save user' }, status: 400
     end
   end
 
   def update
     if current_user.admin? :admin
       data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
-      return render json: { error: 'Cant update user Admin' }, status: :unprocessable_entity if data.empty?
+      return render json: {success: false, error: 'Cant update user Admin' }, status: 422 if data.empty?
 
       if @user.update(data)
-        render json: @user, status: :ok
+        render json: {success: true, data: @user}, status: 400
       else
-        render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+        render json: { success: false, errors: 'Cannot update User' }, status: 422
       end
     else
-      render json: { error: 'you dont have authorization' }, status: :unauthorized
+      render json: { success: false, error: 'you dont have authorization' }, status: 401
     end
   end
 
   def destroy
     if current_user.admin?
       @user.destroy
-      render json: @user, status: :ok
+      render json: {success: true, data: @user}, status: 200
     else
-      render json: { error: 'you dont have authorization' }, status: :unauthorized
+      render json: { success: false, error: 'you dont have authorization' }, status: 401
     end
   end
 
@@ -52,6 +52,6 @@ class Api::V1::UsersController < ApplicationController
   def find_user
     @user = User.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'User not found' }, status: :not_found
+    render json: { success: false, error: 'User not found' }, status: 404
   end
 end
