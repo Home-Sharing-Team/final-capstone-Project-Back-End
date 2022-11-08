@@ -4,46 +4,43 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: {success: true, data: @users}, status: 200
+    render json: {success: true, data: @users}, status: :ok
   end
 
   def show
-    render json: {success: true, data: @user}, status: 200
+    render json: {success: true, data: @user}, status: :ok
   end
 
   def create
-    data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) && allow != :role }
-    return render json: { success: false, error: 'Can not create user without all the requested information' }, status: 400 if data.empty?
-
-    user = User.new(data)
+    user = User.new(create_user_params)
     if user.save
-      render json:  {success: true, data: user}, status: 201
+      render json:  {success: true, data: user}, status: :created
     else
-      render json: { success: false, error: 'Cannot save user' }, status: 400
+      render json: { success: false, error: 'Cannot save user' }, status: :bad_request
     end
   end
 
   def update
     if current_user.admin? :admin
       data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
-      return render json: {success: false, error: 'Cant update user Admin' }, status: 422 if data.empty?
+      return render json: {success: false, error: 'Cant update user Admin' }, status: :unprocessable_entity if data.empty?
 
       if @user.update(data)
-        render json: {success: true, data: @user}, status: 400
+        render json: {success: true, data: @user}, status: :bad_request
       else
-        render json: { success: false, errors: 'Cannot update User' }, status: 422
+        render json: { success: false, errors: 'Cannot update User' }, status: :unprocessable_entity
       end
     else
-      render json: { success: false, error: 'you dont have authorization' }, status: 401
+      render json: { success: false, error: 'you dont have authorization' }, status: :unauthorized
     end
   end
 
   def destroy
     if current_user.admin?
       @user.destroy
-      render json: {success: true, data: @user}, status: 200
+      render json: {success: true, data: @user}, status: :ok
     else
-      render json: { success: false, error: 'you dont have authorization' }, status: 401
+      render json: { success: false, error: 'you dont have authorization' }, status: :unauthorized
     end
   end
 
@@ -52,6 +49,10 @@ class Api::V1::UsersController < ApplicationController
   def find_user
     @user = User.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'User not found' }, status: 404
+    render json: { success: false, error: 'User not found' }, status: :not_found
   end
+
+  def create_user_params
+    params.permit(:name, :email, :password)
+  end 
 end

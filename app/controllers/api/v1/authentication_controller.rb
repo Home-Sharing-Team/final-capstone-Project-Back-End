@@ -1,8 +1,8 @@
 class Api::V1::AuthenticationController < ApplicationController
-     before_action :authenticate_user, only: [:me]
+     before_action :authenticate_user, only: [:getCurrentUser]
 
     def sign_in
-        return render json: { success: false, error: 'Invalid request! Missing information.' }, status: 400 unless params[:email] && params[:password]
+        return render json: { success: false, error: 'Invalid request! Missing information.' }, status: :bad_request unless params[:email] && params[:password]
 
         user = User.find_by(email: params[:email])
         if user&.authenticate(params[:password])
@@ -14,13 +14,13 @@ class Api::V1::AuthenticationController < ApplicationController
                     user:, 
                     accessToken: token
                 } 
-            }, status: 200
+            }, status: :ok
         else
             render json: { success: false, error: 'Invalid email or password' }, status: :unauthorized
         end
     end
 
-    def me 
+    def getCurrentUser 
         render json: { success: true, data: @current_user }, status: :ok
     end
 end
