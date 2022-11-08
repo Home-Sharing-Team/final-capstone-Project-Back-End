@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  # before_action :authenticate_user!
+   before_action :authenticate_user!
   ALLOWED_DATA = %i[name email password password_confirmation role].freeze
 
   def index
