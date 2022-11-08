@@ -35,7 +35,6 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def destroy
-    #can? :destroy, @property
     @property.destroy
     render json: { success: true, data: @property }, status: :ok
   end

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       post 'auth/sign_in', to: 'authentication#sign_in'
       get 'auth/me', to: 'authentication#getCurrentUser'
       resources :properties, only: %i[index show create update destroy]
-      resources :addresses, only: %i[index show create update destroy delete]
+      resources :addresses, only: %i[index show create update destroy]
     end
   end
 

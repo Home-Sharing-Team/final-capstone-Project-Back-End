@@ -8,6 +8,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     render json: { success: true, data: @user }, status: :ok
   end
 
@@ -21,30 +22,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if current_user.admin? :admin
-      data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
-      if data.empty?
-        return render json: { success: false, error: 'Cant update user Admin' },
-                      status: :unprocessable_entity
-      end
-
-      if @user.update(data)
-        render json: { success: true, data: @user }, status: :bad_request
-      else
-        render json: { success: false, errors: 'Cannot update User' }, status: :unprocessable_entity
-      end
+    if @user.update(data)
+      render json: { success: true, data: @user }, status: :bad_request
     else
-      render json: { success: false, error: 'you dont have authorization' }, status: :unauthorized
+      render json: { success: false, errors: 'Cannot update User' }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if current_user.admin?
-      @user.destroy
-      render json: { success: true, data: @user }, status: :ok
-    else
-      render json: { success: false, error: 'you dont have authorization' }, status: :unauthorized
-    end
+    @user = User.find(params[:id])
+    @user.destroy
+    render json: { success: true, data: @user }, status: :ok
   end
 
   private

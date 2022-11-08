@@ -1,7 +1,7 @@
 class BlockedPeriod < ApplicationRecord
   belongs_to :property
-  validates :start_date, presence: true, availability: true
-  validates :end_date, presence: true, availability: true
+  # validates :start_date, presence: true, availability: true
+  # validates :end_date, presence: true, availability: true
 
   validate :end_date_after_start_date
 
