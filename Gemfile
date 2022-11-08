@@ -19,7 +19,6 @@ gem 'puma', '~> 5.0'
 # gem "jbuilder"
 
 # devise autentication
-gem 'devise', '~> 4.2'
 
 # gem for authorization
 gem 'cancancan', '~> 3.0'
@@ -54,3 +53,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem "jwt", "~> 2.5"
+
+gem "bcrypt", "~> 3.1"

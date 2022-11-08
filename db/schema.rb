@@ -10,24 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_07_181138) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_07_171526) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string "street"
-    t.string "number"
-    t.string "city"
-    t.string "country"
-    t.string "zip_code"
+    t.string "street", null: false
+    t.integer "number", null: false
+    t.string "city", null: false
+    t.string "country", null: false
+    t.string "zip_code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "blocked_periods", force: :cascade do |t|
+    t.date "start_date", null: false
+    t.date "end_date", null: false
     t.bigint "property_id", null: false
-    t.date "start_date"
-    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["property_id"], name: "index_blocked_periods_on_property_id"
@@ -40,13 +40,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_181138) do
   end
 
   create_table "hostings", force: :cascade do |t|
+    t.integer "cycle", null: false
+    t.integer "minimum_cycle_amount", null: false
+    t.float "rate", null: false
+    t.boolean "public", default: true, null: false
+    t.float "cleaning_fee"
     t.bigint "user_id", null: false
     t.bigint "properties_id", null: false
-    t.integer "cycle"
-    t.integer "minimum_cycle_amount"
-    t.float "rate"
-    t.float "cleaning_fee", null: false
-    t.boolean "public", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["properties_id"], name: "index_hostings_on_properties_id"
@@ -54,15 +54,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_181138) do
   end
 
   create_table "properties", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.integer "guest_capacity", null: false
+    t.integer "bedrooms", null: false
+    t.integer "beds", null: false
+    t.integer "bathrooms", null: false
+    t.integer "kind", default: 0, null: false
+    t.float "size", null: false
     t.bigint "user_id", null: false
-    t.string "name"
-    t.string "description"
-    t.integer "quest_capacity"
-    t.integer "bedrooms"
-    t.integer "beds"
-    t.integer "bathrooms"
-    t.integer "type"
-    t.float "size"
     t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,38 +80,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_181138) do
   end
 
   create_table "property_images", force: :cascade do |t|
+    t.string "source", null: false
     t.bigint "property_id", null: false
-    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["property_id"], name: "index_property_images_on_property_id"
   end
 
   create_table "reservations", force: :cascade do |t|
+    t.integer "quests", null: false
+    t.date "check_in", null: false
+    t.date "check_out", null: false
+    t.float "price", null: false
     t.bigint "user_id", null: false
     t.bigint "hosting_id", null: false
-    t.integer "quests"
-    t.date "check_in"
-    t.date "check_out"
-    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hosting_id"], name: "index_reservations_on_hosting_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
-  create_table "users", id: :bigint, default: -> { "nextval('user_id_seq'::regclass)" }, force: :cascade do |t|
-    t.string "name"
-    t.integer "role", default: 0
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "blocked_periods", "properties"
