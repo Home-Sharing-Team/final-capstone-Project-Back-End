@@ -23,7 +23,7 @@ class Api::V1::AuthenticationController < ApplicationController
     end
   end
 
-  def GetCurrentUser
+  def get_current_user
     render json: { success: true, data: @current_user }, status: :ok
   end
 end
