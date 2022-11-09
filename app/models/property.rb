@@ -1,4 +1,5 @@
 class Property < ApplicationRecord
+  has_and_belongs_to_many :categories
   has_many :property_images, dependent: :destroy
   has_many :property_categories, dependent: :destroy
   has_many :blocked_periods, dependent: :destroy

@@ -19,8 +19,11 @@ class Api::V1::PropertiesController < ApplicationController
 
   def create
     property = Property.new(create_params)
+    
 
     if property.save
+
+      
       render json: { success: true, data: property }, status: :created
     else
       render json: { success: false, error: 'Cannot save property' }, status: :bad_request
@@ -41,6 +44,8 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   private
+
+
 
   def find_property
     @property = Property.find(params[:id])
