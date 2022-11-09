@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :property_images, only: %i[index show create update destroy]
       resources :blocked_periods, only: %i[index show create update destroy]
       resources :categories, only: %i[index show create update destroy]
+      resources :hostings, only: %i[index show create update destroy]
+      resources :reservations, only: %i[index show create update destroy]
 
     end
   end

@@ -22,7 +22,7 @@ class Api::V1::PropertiesController < ApplicationController
     
 
     if property.save
-
+      property.categories << array_of_categories
       
       render json: { success: true, data: property }, status: :created
     else
@@ -45,7 +45,12 @@ class Api::V1::PropertiesController < ApplicationController
 
   private
 
-
+  def array_of_categories
+    category_test = Category.find_by_id(1)
+    category_test2 = Category.find_by_id(2)
+    categories = [category_test, category_test2]
+   
+    end
 
   def find_property
     @property = Property.find(params[:id])

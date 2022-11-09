@@ -13,3 +13,5 @@ Address.create(street: 'Calle 2', city: 'Taiwan', country: 'China', zip_code: '1
 Property.create(name: 'Casa 1', description: 'Casa 1', guest_capacity: 1, bedrooms: 1, beds: 1, bathrooms: 1, kind: 'apartment', address_id: 1, size: 1, user_id: 1)
 BlockedPeriod.create(start_date: '2021-01-01', end_date: '2021-01-02', property_id: 1)
 Category.create(name: 'Casa' , property_category_id: 1)
+Hosting.create(cycle: 1, minimum_cycle_amount: 1, rate: 1, public: true, cleaning_fee: 1, user_id: 1, properties_id: 1)
+Reservation.create(start_date: '2021-01-01', end_date: '2021-01-02', user_id: 1, property_id: 1)

@@ -20,7 +20,7 @@ class Api::V1::CategoriesController < ApplicationController
          
         category = Category.new(create_params)
         if category.save
-            category.properties << array_of_properties
+            #category.properties << array_of_properties
             render json: { success: true, data: category }, status: :created
         else
             render json: { success: false, error: 'Cannot save category' }, status: :bad_request
@@ -42,11 +42,11 @@ class Api::V1::CategoriesController < ApplicationController
 
     private
 
-    def array_of_properties
-            property_test = Property.find_by_id(3)
-            properties = [property_test]
+    #def array_of_properties
+            #property_test = Property.find_by_id(3)
+            #properties = [property_test]
            
-            end
+            #end
         
     def find_category
         @category = Category.find(params[:id])

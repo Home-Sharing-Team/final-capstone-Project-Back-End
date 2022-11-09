@@ -26,3 +26,13 @@ format for create Property images API
 "source": "https://es.wikipedia.org/wiki/Isla_de_Margarita#/media/Archivo:IslaBonitaMargarita.jpg",
       "property_id": 3
 }
+format for create Hosting API
+{
+"cycle": 2,
+"minimum_cycle_amount": 4,
+"rate": 60,
+"public": true,
+"cleaning_fee": 1,
+"user_id": 2,
+"properties_id": 3
+}
