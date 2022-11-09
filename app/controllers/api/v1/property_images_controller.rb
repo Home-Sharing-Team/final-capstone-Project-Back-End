@@ -1,10 +1,10 @@
-class PropertyImagesController < ApplicationController
+class  Api::V1::PropertyImagesController < ApplicationController
 
     before_action :find_property_image, except: %i[create index]
     ALLOWED_DATA = %i[source property_id].freeze
 
     def index
-        @property_images = Property_image.all
+        @property_images = PropertyImage.all
         render json: { success: true, data: @property_images }, status: :ok
       rescue ActiveRecord::RecordNotFound
         render json: { success: false, error: 'Property images not found' }, status: :not_found
@@ -18,7 +18,7 @@ class PropertyImagesController < ApplicationController
     
       def create
         
-        property_image = Property_image.new(create_params)
+        property_image = PropertyImage.new(create_params)
         
         if property_image.save
           render json: { success: true, data: property_image }, status: :created
@@ -43,8 +43,8 @@ class PropertyImagesController < ApplicationController
     
       private
     
-      def find_property_iamge
-        @property_image = Property_image.find(params[:id])
+      def find_property_image
+        @property_image = PropertyImage.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         render json: { success: false, error: 'Property image not found' }, status: :not_found
       end
