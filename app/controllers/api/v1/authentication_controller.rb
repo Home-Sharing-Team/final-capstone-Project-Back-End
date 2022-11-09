@@ -1,5 +1,5 @@
 class Api::V1::AuthenticationController < ApplicationController
-  before_action :authenticate_user, only: [:getCurrentUser]
+  before_action :authenticate_user, only: [:current_user]
 
   def sign_in
     unless params[:email] && params[:password]
@@ -23,7 +23,7 @@ class Api::V1::AuthenticationController < ApplicationController
     end
   end
 
-  def GetCurrentUser
+  def current_user
     render json: { success: true, data: @current_user }, status: :ok
   end
 end
