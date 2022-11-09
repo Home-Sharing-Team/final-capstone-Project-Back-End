@@ -1,3 +1,4 @@
+# rubocop:disable Lint/UselessAssignment
 class ApplicationController < ActionController::API
   include JwtToken
 
@@ -19,9 +20,10 @@ class ApplicationController < ActionController::API
       @current_user = User.find(@decoded[:user_id])
       @current_user.password_digest = nil
     rescue ActiveRecord::RecordNotFound => e
-      render json: { success: false, e: }, status: :unauthorized
-    rescue JWT::DecodeError
+      render json: { success: false, error: e.message }, status: :unauthorized
+    rescue JWT::DecodeError => e
       render json: { success: false, error: 'Invalid token!' }, status: :unauthorized
     end
   end
 end
+# rubocop:enable Lint/UselessAssignment
