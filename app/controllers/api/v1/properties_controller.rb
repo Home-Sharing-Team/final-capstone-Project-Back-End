@@ -18,9 +18,8 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def create
-    
     property = Property.new(create_params)
-    
+
     if property.save
       render json: { success: true, data: property }, status: 201
     else
@@ -29,7 +28,6 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def update
-    
     if @property.update
       render json: { success: true, data: @property }, status: :bad_request
     else
