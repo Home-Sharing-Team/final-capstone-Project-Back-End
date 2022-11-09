@@ -2,7 +2,7 @@ class Property < ApplicationRecord
   has_many :property_images, dependent: :destroy
   has_many :property_categories, dependent: :destroy
   has_many :blocked_periods, dependent: :destroy
-  has_one :address, dependent: :destroy
+  has_one :address
   belongs_to :user
 
   validates :name, presence: true
