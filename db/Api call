@@ -21,3 +21,8 @@ format for create Address API
     "zip_code": "45678",
 
 }
+format for create Property images API
+ {
+"source": "https://es.wikipedia.org/wiki/Isla_de_Margarita#/media/Archivo:IslaBonitaMargarita.jpg",
+      "property_id": 3
+}
