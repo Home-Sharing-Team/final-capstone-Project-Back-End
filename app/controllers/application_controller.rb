@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
       @current_user.password_digest = nil
     rescue ActiveRecord::RecordNotFound => e
       render json: { success: false, e: }, status: :unauthorized
-    rescue JWT::DecodeError => e
+    rescue JWT::DecodeError
       render json: { success: false, error: 'Invalid token!' }, status: :unauthorized
     end
   end
