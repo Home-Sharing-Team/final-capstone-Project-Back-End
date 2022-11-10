@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_09_215116) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_09_235404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,7 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_215116) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "quests", null: false
+    t.integer "guests", null: false
     t.date "check_in", null: false
     t.date "check_out", null: false
     t.float "price", null: false

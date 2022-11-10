@@ -1,7 +1,7 @@
 class CreateReservationsTable < ActiveRecord::Migration[7.0]
   def change
     create_table :reservations do |t|
-      t.integer :quests, null: false
+      t.integer :guests, null: false
       t.date :check_in, null: false
       t.date :check_out, null: false
       t.float :price, null: false

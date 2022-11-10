@@ -1,6 +1,6 @@
 class Api::V1::ReservationsController < ApplicationController
     before_action :find_reservation, only: %i[show update destroy]
-    ALLOWED_DATA = %i[check_in check_out user_id quests price hosting_id].freeze
+    ALLOWED_DATA = %i[check_in check_out user_id guests price hosting_id].freeze
 
     def index
         @reservations = Reservation.all
