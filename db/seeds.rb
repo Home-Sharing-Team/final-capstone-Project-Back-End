@@ -14,4 +14,4 @@ Property.create(name: 'Casa 1', description: 'Casa 1', guest_capacity: 1, bedroo
 BlockedPeriod.create(start_date: '2021-01-01', end_date: '2021-01-02', property_id: 1)
 Category.create(name: 'Casa' , property_category_id: 1)
 Hosting.create(cycle: 1, minimum_cycle_amount: 1, rate: 1, public: true, cleaning_fee: 1, user_id: 1, properties_id: 1)
-Reservation.create(start_date: '2021-01-01', end_date: '2021-01-02', user_id: 1, property_id: 1)
+Reservation.create(check_in: '2021-01-01', check_out: '2021-01-02', guests: 1, user_id: 1, hosting_id: 1, )

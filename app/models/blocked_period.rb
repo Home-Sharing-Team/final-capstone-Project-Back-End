@@ -24,3 +24,4 @@ class BlockedPeriod < ApplicationRecord
     errors.add(:start_date, 'must be after today')
   end
 end
+

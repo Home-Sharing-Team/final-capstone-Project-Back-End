@@ -36,3 +36,19 @@ format for create Hosting API
 "user_id": 2,
 "properties_id": 3
 }
+format for create reservations API
+{
+ "check_in": "2022-11-05",
+ "check_out": "2022-11-06",
+ "guests": 1,
+ "user_id": 1,
+ "hosting_id": 4,
+ "price": 200
+}
+
+format for create blocked_periods API
+{
+    "start_date": "2021-01-02",
+    "end_date": "2021-01-01",
+    "property_id": 16
+    }

@@ -17,13 +17,14 @@ class Api::V1::BlockedPeriodsController < ApplicationController
     end
 
     def create
-        blocked_period = BlockedPeriod.new(create_params)
-        if blocked_period.save
-            render json: { success: true, data: blocked_period }, status: :created
+        @blocked_period = BlockedPeriod.new(create_params)
+        if @blocked_period.save
+            render json: { success: true, data: @blocked_period }, status: :created
         else
-            render json: { success: false, error: 'Cannot save blocked period' }, status: :bad_request
+            render json: { success: false, error: @blocked_period.errors }, status: :unprocessable_entity
         end
     end
+    
 
     def update
         if @blocked_period.update
