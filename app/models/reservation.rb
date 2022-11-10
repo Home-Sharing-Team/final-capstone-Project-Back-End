@@ -12,21 +12,20 @@ validate :check_blocked_periods
   private
 
 def check_minimum_cycle
-
+  p hosting_id
+  p "test test test"
   number_of_days = check_out - check_in
-  hosting = Hosting.find([hosting_id])
+  hosting = Hosting.find(hosting_id)
 
-   minimum_cycle_amount = hosting.minimum_cycle_amount
+   min_cycle_amount = hosting[:minimum_cycle_amount]
    cycle = hosting.cycle
 
-  # minimum_cycle_amount = 2
-  # cycle = 1
   if cycle == 0
-    errors.add("Sorry, the minimum number of days to rent this property must be ", 1 * minimum_cycle_amount) if number_of_days < 1 * minimum_cycle_amount
+    errors.add("Sorry, the minimum number of days to rent this property must be ", 1 * min_cycle_amount) if number_of_days < 1 * min_cycle_amount
   elsif cycle == 1
-    errors.add("Sorry, the minimum number of days to rent this property must be ", 7 * minimum_cycle_amount) if number_of_days < 7 * minimum_cycle_amount
+    errors.add("Sorry, the minimum number of days to rent this property must be ", 7 * min_cycle_amount) if number_of_days < 7 * min_cycle_amount
   elsif cycle == 2
-    errors.add("Sorry, the minimum number of days to rent this property must be ", 30 * minimum_cycle_amount) if number_of_days < 30 * minimum_cycle_amount
+    errors.add("Sorry, the minimum number of days to rent this property must be ", 30 * min_cycle_amount) if number_of_days < 30 * min_cycle_amount
   end
 end
 
@@ -50,11 +49,9 @@ end
 
 
 def check_blocked_periods
-  hosting = Hosting.find([hosting_id])
-
-  #@blocked_periods = hosting.properties_id.blocked_periods.all
-
-  @blocked_periods = [BlockedPeriod.find_by_id(1), BlockedPeriod.find_by_id(2)]
+  hosting = Hosting.find(hosting_id)
+  property = Property.find(hosting.properties_id)
+  @blocked_periods = property.blocked_periods
 
   @blocked_periods.each do |block|
     if !(check_in > block.end_date || check_out < block.start_date)

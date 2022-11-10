@@ -18,7 +18,14 @@ class Api::V1::ReservationsController < ApplicationController
     def create
         @reservation = Reservation.new(create_params)
         if @reservation.save
-            render json: { success: true, data: @reservation }, status: :created
+           hosting = Hosting.find(params[:hosting_id])
+
+            @blocked_period = BlockedPeriod.new(property_id: hosting.properties_id, start_date: params[:check_in], end_date: params[:check_out])
+            if @blocked_period.save
+                render json: { success: true, data: @reservation }, status: :created
+            else
+                render json: { success: false, error: 'Cannot save reservation' }, status: 500
+            end
         else
             render json: { success: false, error: @reservation.errors }, status: :unprocessable_entity
         end

@@ -1,4 +1,6 @@
 class Api::V1::HostingsController < ApplicationController
+before_action :authenticate_user, only: %i[create update destroy]
+before_action :check_ownership, only: %i[create update destroy]
 before_action :find_hosting, only: %i[show update destroy]
 ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id properties_id].freeze
 
@@ -47,6 +49,16 @@ end
 
 def create_params
     params.permit(ALLOWED_DATA)
+end
+
+def check_ownership
+  property = Property.find(params[:properties_id])
+
+  if @current_user.id != params[:user_id] || property.user_id != @current_user.id
+  
+  render json: { success: false, error: 'You are not authorized to complete this action' }, status: :forbidden
+  
+  end
 end
 
 end
