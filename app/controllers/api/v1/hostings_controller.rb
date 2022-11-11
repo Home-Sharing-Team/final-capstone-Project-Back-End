@@ -2,7 +2,7 @@ class Api::V1::HostingsController < ApplicationController
   before_action :authenticate_user, only: %i[create update destroy]
   before_action :check_ownership, only: %i[create update destroy]
   before_action :find_hosting, only: %i[show update destroy]
-  ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id properties_id].freeze
+  ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id property_id].freeze
 
   def index
     @hostings = Hosting.all
@@ -52,7 +52,7 @@ class Api::V1::HostingsController < ApplicationController
   end
 
   def check_ownership
-    property = Property.find(params[:properties_id])
+    property = Property.find(params[:property_id])
 
     return unless @current_user.id != params[:user_id] || property.user_id != @current_user.id
 

@@ -20,7 +20,7 @@ class Api::V1::ReservationsController < ApplicationController
     if @reservation.save
       hosting = Hosting.find(params[:hosting_id])
 
-      @blocked_period = BlockedPeriod.new(property_id: hosting.properties_id, start_date: params[:check_in],
+      @blocked_period = BlockedPeriod.new(property_id: hosting.property_id, start_date: params[:check_in],
                                           end_date: params[:check_out])
       if @blocked_period.save
         render json: { success: true, data: @reservation }, status: :created

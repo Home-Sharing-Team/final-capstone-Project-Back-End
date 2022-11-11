@@ -34,7 +34,7 @@ format for create Hosting API
 "public": true,
 "cleaning_fee": 1,
 "user_id": 2,
-"properties_id": 3
+"property_id": 3
 }
 format for create reservations API
 {

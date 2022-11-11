@@ -57,7 +57,7 @@ end
 
 def check_blocked_periods
   hosting = Hosting.find(hosting_id)
-  property = Property.find(hosting.properties_id)
+  property = Property.find(hosting.property_id)
   @blocked_periods = property.blocked_periods
 
   @blocked_periods.each do |block|

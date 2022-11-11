@@ -1,12 +1,12 @@
 require 'rails_helper'
 RSpec.describe 'users', type: :request do
-  after(:all) do
-    User.delete_all
+  before(:all) do
+    Rails.application.load_seed
   end
 
   describe 'GET /api/v1/users' do
     it 'returns all users' do
-      User.create!(email: 'davidtest@gmail.com', name: 'David', password: '123456')
+      User.create!(email: 'davidtest7@gmail.com', name: 'David', password: '123456')
 
       get '/api/v1/users'
 
