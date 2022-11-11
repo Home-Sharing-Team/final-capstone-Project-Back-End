@@ -11,6 +11,7 @@ class Reservation < ApplicationRecord
 
   private
 
+  # rubocop:disable Metrics/MethodLength
   def check_minimum_cycle
     number_of_days = check_out - check_in
     hosting = Hosting.find(hosting_id)
@@ -35,6 +36,7 @@ class Reservation < ApplicationRecord
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def check_out_after_check_in
     return if check_out.blank? || check_in.blank?
