@@ -55,6 +55,5 @@ RSpec.describe 'addresses', type: :request do
         end
     end
 
-    describe 'PUT /api/v1/addresses/:id' do
         
 end
