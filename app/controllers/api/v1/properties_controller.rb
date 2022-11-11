@@ -47,7 +47,7 @@ class Api::V1::PropertiesController < ApplicationController
   def array_of_categories
     category_test = Category.find_by_id(1)
     category_test2 = Category.find_by_id(2)
-    categories = [category_test, category_test2]
+    [category_test, category_test2]
   end
 
   def find_property

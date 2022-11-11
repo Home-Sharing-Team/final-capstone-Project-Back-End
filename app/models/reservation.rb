@@ -63,7 +63,7 @@ def check_blocked_periods
   @blocked_periods.each do |block|
     unless check_in > block.end_date || check_out < block.start_date
       errors.add(:check_in, 'Sorry, the property is not available for your dates')
-      return
+      next
     end
   end
 end
