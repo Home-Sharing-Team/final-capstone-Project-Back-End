@@ -12,8 +12,6 @@ validate :check_blocked_periods
   private
 
 def check_minimum_cycle
-  p hosting_id
-  p "test test test"
   number_of_days = check_out - check_in
   hosting = Hosting.find(hosting_id)
 
