@@ -1,7 +1,7 @@
 class BlockedPeriod < ApplicationRecord
   belongs_to :property
-   validates :start_date, presence: true
-   validates :end_date, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
 
   validate :end_date_after_start_date
   validate :start_date_greater_than_today
@@ -24,4 +24,3 @@ class BlockedPeriod < ApplicationRecord
     errors.add(:start_date, 'must be after today')
   end
 end
-
