@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  root to: "home#index"
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :users, only: %i[index show create update destroy]
+      post 'auth/sign_in', to: 'authentication#sign_in'
+      get 'auth/me', to: 'authentication#current_user'
+      resources :properties, only: %i[index show create update destroy]
+      resources :addresses, only: %i[index show create update destroy]
+    end
+  end
+
+  
 end
+
+
+ #{
+  #success: true,
+  #data: {
+    #user: user,
+    #accessToken: JWT_TOKEN,
+  #}

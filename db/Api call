@@ -1,0 +1,23 @@
+format for create Property API
+{
+"name": "paloalto",
+"description": "2 floor house",
+"guest_capacity": 2,
+"bedrooms": 3,
+"beds": 4,
+"bathrooms": 1,
+"size": 100,
+"user_id": 1,
+"address_id": 1,
+"kind": 0
+}
+
+format for create Address API
+{
+    "street": "35th street",
+    "number": 123,
+    "city": "Australia",
+    "country": "Sidney",
+    "zip_code": "45678",
+
+}

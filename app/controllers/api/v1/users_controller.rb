@@ -1,52 +1,38 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authorize_request, except: %i[create]
-  before_action :find_user, except: %i[create index]
-
-  ALLOWED_DATA = %i[name email password password_confirmation role].freeze
+  # before_action :authenticate_user, only: [:index]
+  ALLOWED_DATA = %i[name email password].freeze
 
   def index
     @users = User.all
-    render json: @users, status: :ok
+    render json: { success: true, data: @users }, status: :ok
   end
 
   def show
-    render json: @user, status: :ok
+    @user = User.find(params[:id])
+    render json: { success: true, data: @user }, status: :ok
   end
 
   def create
-    data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) && allow != :role }
-    return render json: { error: 'Cant create user Admin' }, status: :unprocessable_entity if data.empty?
-
-    user = User.new(data)
+    user = User.new(create_user_params)
     if user.save
-      render json: user, status: :created
+      render json: { success: true, data: user }, status: :created
     else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+      render json: { success: false, error: 'Cannot save user' }, status: :bad_request
     end
   end
 
   def update
-    if current_user.admin? :admin
-      data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
-      return render json: { error: 'Cant update user Admin' }, status: :unprocessable_entity if data.empty?
-
-      if @user.update(data)
-        render json: @user, status: :ok
-      else
-        render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-      end
+    if @user.update(data)
+      render json: { success: true, data: @user }, status: :bad_request
     else
-      render json: { error: 'you dont have authorization' }, status: :unauthorized
+      render json: { success: false, errors: 'Cannot update User' }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if current_user.admin?
-      @user.destroy
-      render json: @user, status: :ok
-    else
-      render json: { error: 'you dont have authorization' }, status: :unauthorized
-    end
+    @user = User.find(params[:id])
+    @user.destroy
+    render json: { success: true, data: @user }, status: :ok
   end
 
   private
@@ -54,6 +40,10 @@ class Api::V1::UsersController < ApplicationController
   def find_user
     @user = User.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'User not found' }, status: :not_found
+    render json: { success: false, error: 'User not found' }, status: :not_found
+  end
+
+  def create_user_params
+    params.permit(:name, :email, :password)
   end
 end
