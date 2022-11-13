@@ -9,6 +9,7 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user.password_digest = nil
     render json: { success: true, data: @user }, status: :ok
   end
 

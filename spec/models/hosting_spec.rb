@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Hosting, type: :model do
   before do
     @hosting = Hosting.create(cycle: 1, minimum_cycle_amount: 1, rate: 1, public: true, cleaning_fee: 1,
-                              user_id: 43, property_id: 50)
+                              user_id: 3, property_id: 20)
   end
 
   it 'is valid with valid attributes' do

@@ -26,9 +26,9 @@ RSpec.describe 'properties', type: :request do
           beds: 3,
           bathrooms: 3,
           kind: 'apartment',
-          address_id: 4,
+          address_id: 1,
           size: 3,
-          user_id: 43
+          user_id: 1
         }
       end
       it 'creates a new property' do

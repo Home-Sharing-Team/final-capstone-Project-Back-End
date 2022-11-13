@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Property, type: :model do
   before do
-    @property = Property.create(name: 'Casa 1', description: 'Casa 1', guest_capacity: 1, bedrooms: 1, beds: 1,
-                                bathrooms: 1, kind: 'apartment', address_id: 1, size: 20, user_id: 43)
+    @property = Property.create(name: 'Casa X', description: 'Casa X', guest_capacity: 1, bedrooms: 1, beds: 1,
+                                bathrooms: 1, kind: 'apartment', address_id: 1, size: 20, user_id: 1)
   end
 
   it 'is valid with valid attributes' do
