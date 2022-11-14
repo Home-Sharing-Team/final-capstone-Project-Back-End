@@ -1107,7 +1107,7 @@ paths:
                     data:
                       message: reservation delete successfully   
   "/api/v1/users":
-    get:
+    #get:
       #summary: list users
       #tags:
      # - Users
