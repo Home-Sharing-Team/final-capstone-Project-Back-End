@@ -27,11 +27,15 @@ class Api::V1::HostingsController < ApplicationController
   end
 
   def update
-    if @hosting.update
+    if @hosting.update(update_params)
       render json: { success: true, data: @hosting }, status: :ok
     else
       render json: { success: false, errors: 'Cannot update hosting' }, status: :unprocessable_entity
     end
+  end
+
+  def update_params
+    params.permit(ALLOWED_DATA)
   end
 
   def destroy

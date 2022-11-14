@@ -18,9 +18,6 @@ gem 'puma', '~> 5.0'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
-# Capybara, the library that allows us to interact with the browser using Ruby
-gem 'capybara'
-gem 'rspec-rails'
 # devise autentication
 
 # gem for authorization
@@ -48,9 +45,22 @@ gem 'bootsnap', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
+gem 'rswag'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+
+  # The RSpec testing framework
+  gem 'rspec-rails'
+
+  # Capybara, the library that allows us to interact with the browser using Ruby
+  gem 'capybara'
+
+  # This gem helps Capybara interact with the web browser.
+  gem 'webdrivers'
+
+  gem 'ffi'
 end
 
 group :development do

@@ -2,13 +2,14 @@ class Api::V1::UsersController < ApplicationController
   # before_action :authenticate_user, only: [:index]
   ALLOWED_DATA = %i[name email password].freeze
 
-  def index
-    @users = User.all
-    render json: { success: true, data: @users }, status: :ok
-  end
+  # def index
+  # @users = User.all
+  # render json: { success: true, data: @users }, status: :ok
+  # end
 
   def show
     @user = User.find(params[:id])
+    @user.password_digest = nil
     render json: { success: true, data: @user }, status: :ok
   end
 
@@ -22,11 +23,16 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(data)
-      render json: { success: true, data: @user }, status: :bad_request
+    user = User.find(params[:id])
+    if user.update(update_user_params)
+      render json: { success: true, data: user }, status: :ok
     else
-      render json: { success: false, errors: 'Cannot update User' }, status: :unprocessable_entity
+      render json: { success: false, errors: 'Cannot update user' }, status: :unprocessable_entity
     end
+  end
+
+  def update_user_params
+    params.permit(ALLOWED_DATA)
   end
 
   def destroy

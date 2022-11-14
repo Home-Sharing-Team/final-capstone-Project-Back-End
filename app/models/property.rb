@@ -15,5 +15,5 @@ class Property < ApplicationRecord
   validates :bathrooms, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :kind, presence: true
   enum kind: %i[apartment house]
-  validates :size, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :size, presence: true, numericality: { greater_than_or_equal_to: 1 }
 end

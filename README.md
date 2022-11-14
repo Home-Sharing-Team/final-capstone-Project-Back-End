@@ -135,8 +135,10 @@ https://github.com/David-Verde/final-capstone-Project-Back-End.git
 
   Run Rails s command to run Ruby on Rails console
 
-## Automated Test
- > you can run Rspec spec to check the test
+### Run tests
+
+    rspec spec/capybara
+  
 
 
 
