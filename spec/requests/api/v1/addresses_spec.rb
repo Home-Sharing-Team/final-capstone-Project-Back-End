@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength:
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/addresses', type: :request do
@@ -131,3 +132,4 @@ RSpec.describe 'api/v1/addresses', type: :request do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength:
