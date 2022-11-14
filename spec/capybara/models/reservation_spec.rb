@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
   before do
-    @reservation = Reservation.create(check_in: '2022-11-12', check_out: '2022-11-28', guests: 1, user_id: 3,
-                                      hosting_id: 3, price: '150')
+    @reservation = Reservation.create(check_in: '2023-01-12', check_out: '2023-03-28', guests: 1, user_id: 2,
+                                      hosting_id: 2, price: '150')
   end
 
   it 'is valid with valid attributes' do

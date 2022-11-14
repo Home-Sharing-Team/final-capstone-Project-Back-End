@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BlockedPeriod, type: :model do
   before do
-    @blocked_period = BlockedPeriod.create(start_date: '2022-11-12', end_date: '2022-11-25', property_id: 17)
+    @blocked_period = BlockedPeriod.create(start_date: '2023-01-12', end_date: '2023-02-25', property_id: 1)
   end
 
   it 'is valid with valid attributes' do
