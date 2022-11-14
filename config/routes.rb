@@ -13,17 +13,9 @@ Rails.application.routes.draw do
       resources :categories, only: %i[index show create update destroy]
       resources :hostings, only: %i[index show create update destroy]
       resources :reservations, only: %i[index show create update destroy]
-
     end
   end
 
-  
+root 'api/v1/properties#index'
 end
 
-
- #{
-  #success: true,
-  #data: {
-    #user: user,
-    #accessToken: JWT_TOKEN,
-  #}
