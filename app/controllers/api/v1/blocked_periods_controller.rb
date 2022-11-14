@@ -34,8 +34,6 @@ class Api::V1::BlockedPeriodsController < ApplicationController
     end
   end
 
-
-
   def update_params
     params.permit(ALLOWED_DATA)
   end

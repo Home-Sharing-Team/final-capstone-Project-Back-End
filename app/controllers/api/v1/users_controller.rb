@@ -2,10 +2,10 @@ class Api::V1::UsersController < ApplicationController
   # before_action :authenticate_user, only: [:index]
   ALLOWED_DATA = %i[name email password].freeze
 
-  def index
-    @users = User.all
-    render json: { success: true, data: @users }, status: :ok
-  end
+  # def index
+  # @users = User.all
+  # render json: { success: true, data: @users }, status: :ok
+  # end
 
   def show
     @user = User.find(params[:id])
@@ -34,7 +34,6 @@ class Api::V1::UsersController < ApplicationController
   def update_user_params
     params.permit(ALLOWED_DATA)
   end
-  
 
   def destroy
     @user = User.find(params[:id])

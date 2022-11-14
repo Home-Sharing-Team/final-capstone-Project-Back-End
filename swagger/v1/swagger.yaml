@@ -1108,23 +1108,23 @@ paths:
                       message: reservation delete successfully   
   "/api/v1/users":
     get:
-      summary: list users
-      tags:
-      - Users
-      description: Retrieves all Users
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              examples:
-                successful:
-                  value:
-                    success: true
-                    data:
-                    - name: User Name
-                      Email: User email
-                      password: User password
+      #summary: list users
+      #tags:
+     # - Users
+      #description: Retrieves all Users
+      #responses:
+       # '200':
+         # description: successful
+         # content:
+           # application/json:
+            #  examples:
+              #  successful:
+               #   value:
+                 #   success: true
+                  #  data:
+                   # - name: User Name
+                  #    Email: User email
+                    #  password: User password
 
               
     post:

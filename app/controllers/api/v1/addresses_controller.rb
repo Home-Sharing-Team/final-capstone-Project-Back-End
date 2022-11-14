@@ -25,7 +25,7 @@ class Api::V1::AddressesController < ApplicationController
     end
   end
 
-  def update 
+  def update
     if @address.update(update_params)
       render json: { success: true, data: @address }, status: :ok
     else
@@ -36,7 +36,6 @@ class Api::V1::AddressesController < ApplicationController
   def update_params
     params.permit(ALLOWED_DATA)
   end
-
 
   def destroy
     @address.destroy
