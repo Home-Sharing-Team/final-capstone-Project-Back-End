@@ -6,6 +6,12 @@ Rails.application.routes.draw do
       get 'auth/me', to: 'authentication#current_user'
       resources :properties, only: %i[index show create update destroy]
       resources :addresses, only: %i[index show create update destroy]
+      resources :property_images, only: %i[index show create update destroy]
+      resources :blocked_periods, only: %i[index show create update destroy]
+      resources :categories, only: %i[index show create update destroy]
+      resources :hostings, only: %i[index show create update destroy]
+      resources :reservations, only: %i[index show create update destroy]
+
     end
   end
 

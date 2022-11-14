@@ -18,6 +18,9 @@ gem 'puma', '~> 5.0'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
+# Capybara, the library that allows us to interact with the browser using Ruby
+gem 'capybara'
+gem 'rspec-rails'
 # devise autentication
 
 # gem for authorization

@@ -1,9 +1,10 @@
 class BlockedPeriod < ApplicationRecord
   belongs_to :property
-  # validates :start_date, presence: true, availability: true
-  # validates :end_date, presence: true, availability: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
 
   validate :end_date_after_start_date
+  validate :start_date_greater_than_today
 
   private
 
@@ -13,5 +14,13 @@ class BlockedPeriod < ApplicationRecord
     return unless end_date < start_date
 
     errors.add(:end_date, 'must be after the start date')
+  end
+
+  def start_date_greater_than_today
+    return if start_date.blank?
+
+    return unless start_date < Date.today
+
+    errors.add(:start_date, 'must be after today')
   end
 end
