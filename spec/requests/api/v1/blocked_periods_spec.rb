@@ -1,8 +1,8 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/users', type: :request do
-  path '/api/v1/users' do
-    get('list users') do
+RSpec.describe 'api/v1/blocked_periods', type: :request do
+  path '/api/v1/blocked_periods' do
+    get('list blocked_periods') do
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -15,17 +15,17 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    post('create user') do
+    post('create blocked_period') do
       response(200, 'successful') do
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
+        parameter name: :blocked_period, in: :body, schema: {
           type: :object,
           properties: {
-            name: { type: :string },
-            email: { type: :string },
-            password: { type: :string }
+            start_date: { type: :date },
+            end_date: { type: :date },
+            property_id: { type: :bigint }
           },
-          required: %w[name email password]
+          required: %w[start_date end_date property_id]
         }
 
         after do |example|
@@ -40,11 +40,11 @@ RSpec.describe 'api/v1/users', type: :request do
     end
   end
 
-  path '/api/v1/users/{id}' do
+  path '/api/v1/blocked_periods/{id}' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('show user') do
+    get('show blocked_period') do
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -59,45 +59,18 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    patch('update user') do
-      response(200, 'successful') do
-        consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
-          type: :object,
-          properties: {
-            name: { type: :string },
-            email: { type: :string },
-            password: { type: :string }
-          },
-          required: %w[name email password_digest]
-        }
-
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    put('update user') do
+    patch('update blocked_period') do
       response(200, 'successful') do
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
+        parameter name: :blocked_period, in: :body, schema: {
           type: :object,
           properties: {
-            name: { type: :string },
-            email: { type: :string },
-            password: { type: :string }
+            start_date: { type: :date },
+            end_date: { type: :date },
+            property_id: { type: :bigint }
           },
-          required: %w[name email password_digest]
+          required: %w[start_date end_date property_id]
         }
-
         let(:id) { '123' }
 
         after do |example|
@@ -111,7 +84,32 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    delete('delete user') do
+    put('update blocked_period') do
+      response(200, 'successful') do
+        consumes 'application/json'
+        parameter name: :blocked_period, in: :body, schema: {
+          type: :object,
+          properties: {
+            start_date: { type: :date },
+            end_date: { type: :date },
+            property_id: { type: :bigint }
+          },
+          required: %w[start_date end_date property_id]
+        }
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    delete('delete blocked_period') do
       response(200, 'successful') do
         let(:id) { '123' }
 

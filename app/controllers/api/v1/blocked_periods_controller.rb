@@ -26,11 +26,18 @@ class Api::V1::BlockedPeriodsController < ApplicationController
   end
 
   def update
-    if @blocked_period.update
+    @blocked_period = BlockedPeriod.find(params[:id])
+    if @blocked_period.update(update_params)
       render json: { success: true, data: @blocked_period }, status: :ok
     else
       render json: { success: false, errors: 'Cannot update blocked period' }, status: :unprocessable_entity
     end
+  end
+
+
+
+  def update_params
+    params.permit(ALLOWED_DATA)
   end
 
   def destroy

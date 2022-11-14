@@ -33,11 +33,15 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def update
-    if @reservation.update
+    if @reservation.update(update_params)
       render json: { success: true, data: @reservation }, status: :ok
     else
       render json: { success: false, errors: 'Cannot update reservation' }, status: :unprocessable_entity
     end
+  end
+
+  def update_params
+    params.permit(ALLOWED_DATA)
   end
 
   def destroy

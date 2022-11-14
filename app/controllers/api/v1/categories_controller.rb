@@ -27,11 +27,15 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def update
-    if @category.update
+    if @category.update(update_params)
       render json: { success: true, data: @category }, status: :ok
     else
       render json: { success: false, errors: 'Cannot update category' }, status: :unprocessable_entity
     end
+  end
+
+  def update_params
+    params.permit(ALLOWED_DATA)
   end
 
   def destroy

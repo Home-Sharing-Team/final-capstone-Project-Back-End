@@ -25,13 +25,18 @@ class Api::V1::AddressesController < ApplicationController
     end
   end
 
-  def update
-    if @address.update(data)
-      render json: { success: true, data: @address }, status: :bad_request
+  def update 
+    if @address.update(update_params)
+      render json: { success: true, data: @address }, status: :ok
     else
-      render json: { success: false, errors: 'Cannot update address' }, status: :unprocessable_entity
+      render json: { success: false, error: 'Cannot update address' }, status: :bad_request
     end
   end
+
+  def update_params
+    params.permit(ALLOWED_DATA)
+  end
+
 
   def destroy
     @address.destroy

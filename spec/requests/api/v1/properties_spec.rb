@@ -1,8 +1,8 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/users', type: :request do
-  path '/api/v1/users' do
-    get('list users') do
+RSpec.describe 'api/v1/properties', type: :request do
+  path '/api/v1/properties' do
+    get('list properties') do
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -15,17 +15,22 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    post('create user') do
+    post('create property') do
       response(200, 'successful') do
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
+        parameter name: :property, in: :body, schema: {
           type: :object,
           properties: {
             name: { type: :string },
-            email: { type: :string },
-            password: { type: :string }
+            description: { type: :string },
+            guest_capacity: { type: :integer },
+            bedrooms: { type: :integer },
+            beds: { type: :integer },
+            bathrooms: { type: :integer },
+            kind: { type: :string },
+            size: { type: :integer }
           },
-          required: %w[name email password]
+          required: %w[name description guest_capacity bedrooms beds bathrooms kind size]
         }
 
         after do |example|
@@ -40,11 +45,11 @@ RSpec.describe 'api/v1/users', type: :request do
     end
   end
 
-  path '/api/v1/users/{id}' do
+  path '/api/v1/properties/{id}' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('show user') do
+    get('show property') do
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -59,19 +64,23 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    patch('update user') do
+    patch('update property') do
       response(200, 'successful') do
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
+        parameter name: :property, in: :body, schema: {
           type: :object,
           properties: {
             name: { type: :string },
-            email: { type: :string },
-            password: { type: :string }
+            description: { type: :string },
+            guest_capacity: { type: :integer },
+            bedrooms: { type: :integer },
+            beds: { type: :integer },
+            bathrooms: { type: :integer },
+            kind: { type: :string },
+            size: { type: :integer }
           },
-          required: %w[name email password_digest]
+          required: %w[name description guest_capacity bedrooms beds bathrooms kind size]
         }
-
         let(:id) { '123' }
 
         after do |example|
@@ -85,19 +94,23 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    put('update user') do
+    put('update property') do
       response(200, 'successful') do
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
+        parameter name: :property, in: :body, schema: {
           type: :object,
           properties: {
             name: { type: :string },
-            email: { type: :string },
-            password: { type: :string }
+            description: { type: :string },
+            guest_capacity: { type: :integer },
+            bedrooms: { type: :integer },
+            beds: { type: :integer },
+            bathrooms: { type: :integer },
+            kind: { type: :string },
+            size: { type: :integer }
           },
-          required: %w[name email password_digest]
+          required: %w[name description guest_capacity bedrooms beds bathrooms kind size]
         }
-
         let(:id) { '123' }
 
         after do |example|
@@ -111,7 +124,7 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    delete('delete user') do
+    delete('delete property') do
       response(200, 'successful') do
         let(:id) { '123' }
 

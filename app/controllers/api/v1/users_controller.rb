@@ -23,12 +23,18 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(data)
-      render json: { success: true, data: @user }, status: :bad_request
+    user = User.find(params[:id])
+    if user.update(update_user_params)
+      render json: { success: true, data: user }, status: :ok
     else
-      render json: { success: false, errors: 'Cannot update User' }, status: :unprocessable_entity
+      render json: { success: false, errors: 'Cannot update user' }, status: :unprocessable_entity
     end
   end
+
+  def update_user_params
+    params.permit(ALLOWED_DATA)
+  end
+  
 
   def destroy
     @user = User.find(params[:id])

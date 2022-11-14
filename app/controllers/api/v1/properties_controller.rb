@@ -30,11 +30,15 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def update
-    if @property.update
+    if @property.update(update_params)
       render json: { success: true, data: @property }, status: :ok
     else
       render json: { success: false, errors: 'Cannot update property' }, status: :unprocessable_entity
     end
+  end
+
+  def update_params
+    params.permit(ALLOWED_DATA)
   end
 
   def destroy
