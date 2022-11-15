@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users, only: %i[show create update destroy] 
-      get 'users/:userId/properties', to: 'properties#user_properties'
+      get 'users/:userId/properties', to: 'properties#fetch_user_properties'
       post 'auth/sign_in', to: 'authentication#sign_in'
       get 'auth/me', to: 'authentication#current_user'
       resources :properties, only: %i[index show create update destroy]

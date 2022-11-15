@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_11_155617) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_15_154637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,15 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_11_155617) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "categories_properties", force: :cascade do |t|
-    t.bigint "property_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_categories_properties_on_category_id"
-    t.index ["property_id"], name: "index_categories_properties_on_property_id"
   end
 
   create_table "hostings", force: :cascade do |t|
@@ -77,6 +68,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_11_155617) do
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_properties_on_address_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
+  end
+
+  create_table "property_categories", force: :cascade do |t|
+    t.bigint "property_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_property_categories_on_category_id"
+    t.index ["property_id"], name: "index_property_categories_on_property_id"
   end
 
   create_table "property_images", force: :cascade do |t|
@@ -111,12 +111,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_11_155617) do
   end
 
   add_foreign_key "blocked_periods", "properties"
-  add_foreign_key "categories_properties", "categories"
-  add_foreign_key "categories_properties", "properties"
   add_foreign_key "hostings", "properties"
   add_foreign_key "hostings", "users"
   add_foreign_key "properties", "addresses"
   add_foreign_key "properties", "users"
+  add_foreign_key "property_categories", "categories"
+  add_foreign_key "property_categories", "properties"
   add_foreign_key "property_images", "properties"
   add_foreign_key "reservations", "hostings"
   add_foreign_key "reservations", "users"

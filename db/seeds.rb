@@ -32,3 +32,7 @@ Hosting.create(cycle: 2, minimum_cycle_amount: 2, rate: 12, public: true, cleani
 BlockedPeriod.create(start_date: '2023-01-01', end_date: '20213-02-02', property_id: 1)
 Reservation.create(check_in: '2023-03-01', check_out: '2023-06-02', guests: 1, user_id: 1, hosting_id: 2, price: 100)
 PropertyImage.create(property_id: 1, source: 'https://images.unsplash.com/photo-1610078888888-1b1b1b1b1b1b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80')
+
+PropertyCategory.create(property_id: 1, category_id: 1)
+PropertyCategory.create(property_id: 2, category_id: 1)
+PropertyCategory.create(property_id: 1, category_id: 2)

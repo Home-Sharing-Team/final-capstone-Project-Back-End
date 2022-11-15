@@ -1,21 +1,32 @@
 class Api::V1::PropertiesController < ApplicationController
   # before_action :authorize_request
-  before_action :find_property, except: %i[user_properties create index]
+  before_action :find_property, except: %i[fetch_user_properties create index]
 
   ALLOWED_DATA = %i[name description guest_capacity bedrooms beds bathrooms kind size user_id address_id].freeze
 
   def index
-    @properties = Property.all
-    render json: { success: true, data: @properties }, status: :ok
-  rescue ActiveRecord::ActiveRecordError
-    render json: { success: false, error: 'Internal server error' }, status: :internal_server_error
+    begin
+      if params[:category]
+        category = Category.find(params[:category])
+        p category.properties
+        @properties = category.properties
+      else
+        @properties = Property.all
+      end
+      
+      render json: { success: true, data: @properties }, status: :ok
+    rescue ActiveRecord::RecordNotFound
+      render json: { success: false, error: 'No category with this ID.' }, status: :not_found
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    end
   end
 
-  def user_properties
+  def fetch_user_properties
     @properties = Property.where(user: params[:userId])
     render json: { success: true, data: @properties }, status: :ok
   rescue ActiveRecord::ActiveRecordError
-    render json: { success: false, error: 'Internal server error' }, status: :internal_server_error
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def show
