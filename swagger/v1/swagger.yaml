@@ -233,7 +233,7 @@ paths:
                   value:
                     success: true
                     data:
-                    - Id: 3
+                     Id: 3
                       start_date: "2022-12-10"
                       end_date: "2022-12-30"
                       property_id: 2
