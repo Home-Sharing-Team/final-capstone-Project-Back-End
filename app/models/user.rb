@@ -5,7 +5,11 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: {
+    message: ->(object, data) do
+      "The email '#{data[:value]}' is already taken."
+    end
+  }
   validates :password, presence: true
 
   enum role: %i[user admin]

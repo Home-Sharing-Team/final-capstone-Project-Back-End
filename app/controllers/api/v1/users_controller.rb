@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: { success: true, data: user }, status: :created
     else
-      render json: { success: false, error: 'Cannot save user' }, status: :bad_request
+      render json: { success: false, error: 'User could not be registered.' }, status: :bad_request
     end
   end
 

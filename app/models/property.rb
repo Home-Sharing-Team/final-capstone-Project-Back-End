@@ -19,20 +19,18 @@ class Property < ApplicationRecord
   validates :size, presence: true, numericality: { greater_than_or_equal_to: 1 }
 
   def set_min_cycle_hosting
-    hostings_hash = self.hostings.reduce(Hash.new) do |acc, hosting|
+    hostings_hash = hostings.reduce({}) do |acc, hosting|
       { **acc, hosting[:cycle] => hosting }
     end
 
-    if hostings_hash["night"] 
-      self.min_cycle_hosting_id = hostings_hash["night"].id
-    elsif hostings_hash["week"] 
-      self.min_cycle_hosting_id = hostings_hash["week"].id
-    elsif hostings_hash["month"] 
-      self.min_cycle_hosting_id = hostings_hash["month"].id
-    else
-      self.min_cycle_hosting_id = nil
-    end
+    self.min_cycle_hosting_id = if hostings_hash['night']
+                                  hostings_hash['night'].id
+                                elsif hostings_hash['week']
+                                  hostings_hash['week'].id
+                                elsif hostings_hash['month']
+                                  hostings_hash['month'].id
+                                end
 
-    self.save
+    save
   end
 end
