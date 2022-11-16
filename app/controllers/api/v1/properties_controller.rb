@@ -8,15 +8,16 @@ class Api::V1::PropertiesController < ApplicationController
     begin
       if params[:category]
         category = Category.find(params[:category])
-        p category.properties
         @properties = category.properties
       else
         @properties = Property.all
       end
+
+      properties = JSON.parse(@properties.to_json({include: [:images, :min_cycle_hosting, :address]}))
       
-      render json: { success: true, data: @properties }, status: :ok
+      render json: { success: true, data: properties }, status: :ok
     rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: 'No category with this ID.' }, status: :not_found
+      render json: { success: false, error: 'No category found with this ID.' }, status: :not_found
     rescue ActiveRecord::ActiveRecordError
       render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
     end
@@ -30,7 +31,9 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def show
-    render json: { success: true, data: @property }, status: :ok
+    property = JSON.parse(@property.to_json({include: [:images, :blocked_periods, :categories, :min_cycle_hosting, :address, :hostings, :user => {except: :password_digest}]}))
+
+    render json: { success: true, data: property }, status: :ok
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Property not found' }, status: :not_found
   end

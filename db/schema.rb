@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_15_154637) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,7 +66,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_154637) do
     t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "min_cycle_hosting_id"
     t.index ["address_id"], name: "index_properties_on_address_id"
+    t.index ["min_cycle_hosting_id"], name: "index_properties_on_min_cycle_hosting_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
@@ -114,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_154637) do
   add_foreign_key "hostings", "properties"
   add_foreign_key "hostings", "users"
   add_foreign_key "properties", "addresses"
+  add_foreign_key "properties", "hostings", column: "min_cycle_hosting_id"
   add_foreign_key "properties", "users"
   add_foreign_key "property_categories", "categories"
   add_foreign_key "property_categories", "properties"
