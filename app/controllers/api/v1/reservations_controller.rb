@@ -3,16 +3,32 @@ class Api::V1::ReservationsController < ApplicationController
   ALLOWED_DATA = %i[check_in check_out user_id guests price hosting_id].freeze
 
   def index
-    @reservations = Reservation.all
-    render json: { success: true, data: @reservations }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Reservations not found' }, status: :not_found
+    begin
+      @reservations = Reservation.all
+      render json: { success: true, data: @reservations }, status: :ok
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    end
   end
 
-  def show
-    render json: { success: true, data: @reservation }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Reservation not found' }, status: :not_found
+  def fetch_user_reservations
+    begin
+      @reservations = Reservation.where(user: params[:userId])
+
+      render json: { success: true, data: @reservations }, status: :ok
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    end
+  end
+
+  def show    
+    begin
+      render json: { success: true, data: @reservation }, status: :ok
+    rescue ActiveRecord::RecordNotFound
+      render json: { success: false, error: 'Reservation not found' }, status: :not_found
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    end
   end
 
   def create

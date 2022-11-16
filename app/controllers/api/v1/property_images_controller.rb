@@ -3,16 +3,22 @@ class Api::V1::PropertyImagesController < ApplicationController
   ALLOWED_DATA = %i[source property_id].freeze
 
   def index
-    @property_images = PropertyImage.all
-    render json: { success: true, data: @property_images }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Property images not found' }, status: :not_found
+    begin
+      @property_images = PropertyImage.all
+      render json: { success: true, data: @property_images }, status: :ok
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    end
   end
 
   def show
-    render json: { success: true, data: @property_image }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Property image not found' }, status: :not_found
+    begin
+      render json: { success: true, data: @property_image }, status: :ok
+    rescue ActiveRecord::RecordNotFound
+      render json: { success: false, error: 'Property image not found' }, status: :not_found
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error    
+    end
   end
 
   def create

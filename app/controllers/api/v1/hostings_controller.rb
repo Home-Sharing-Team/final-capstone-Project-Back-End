@@ -5,16 +5,22 @@ class Api::V1::HostingsController < ApplicationController
   ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id property_id].freeze
 
   def index
-    @hostings = Hosting.all
-    render json: { success: true, data: @hostings }, status: :ok
-  rescue ActiveRecord::ActiveRecordError
-    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    begin
+      @hostings = Hosting.all
+      render json: { success: true, data: @hostings }, status: :ok
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    end
   end
 
   def show
-    render json: { success: true, data: @hosting }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Hosting not found' }, status: :not_found
+    begin
+      render json: { success: true, data: @hosting }, status: :ok
+    rescue ActiveRecord::RecordNotFound
+      render json: { success: false, error: 'Hosting not found' }, status: :not_found
+    rescue ActiveRecord::ActiveRecordError
+      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    end
   end
 
   def create
