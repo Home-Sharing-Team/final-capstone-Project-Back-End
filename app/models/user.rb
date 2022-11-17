@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: {
-    message: ->(object, data) do
+    message: lambda do |_object, data|
       "The email '#{data[:value]}' is already taken."
     end
   }

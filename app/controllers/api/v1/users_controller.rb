@@ -8,15 +8,13 @@ class Api::V1::UsersController < ApplicationController
   # end
 
   def show
-    begin
-      @user = User.find(params[:id])
-      @user.password_digest = nil
-      render json: { success: true, data: @user }, status: :ok
-    rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: 'No user found with this ID.' }, status: :not_found
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-    end
+    @user = User.find(params[:id])
+    @user.password_digest = nil
+    render json: { success: true, data: @user }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'No user found with this ID.' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def create

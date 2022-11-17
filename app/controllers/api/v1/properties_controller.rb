@@ -5,44 +5,38 @@ class Api::V1::PropertiesController < ApplicationController
   ALLOWED_DATA = %i[name description guest_capacity bedrooms beds bathrooms kind size user_id address_id].freeze
 
   def index
-    begin
-      if params[:category]
-        category = Category.find(params[:category])
-        @properties = category.properties
-      else
-        @properties = Property.all
-      end
-
-      properties = JSON.parse(@properties.to_json({ include: %i[images min_cycle_hosting address] }))
-
-      render json: { success: true, data: properties }, status: :ok
-    rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: 'No category found with this ID.' }, status: :not_found
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    if params[:category]
+      category = Category.find(params[:category])
+      @properties = category.properties
+    else
+      @properties = Property.all
     end
+
+    properties = JSON.parse(@properties.to_json({ include: %i[images min_cycle_hosting address] }))
+
+    render json: { success: true, data: properties }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'No category found with this ID.' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def fetch_user_properties
-    begin
-      @properties = Property.where(user: params[:userId])
-      render json: { success: true, data: @properties }, status: :ok
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-    end
+    @properties = Property.where(user: params[:userId])
+    render json: { success: true, data: @properties }, status: :ok
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def show
-    begin
-      property = JSON.parse(@property.to_json({ include: [:images, :blocked_periods, :categories, :min_cycle_hosting,
-                                                          :address, :hostings, { user: { except: :password_digest } }] }))
+    property = JSON.parse(@property.to_json({ include: [:images, :blocked_periods, :categories, :min_cycle_hosting,
+                                                        :address, :hostings, { user: { except: :password_digest } }] }))
 
-      render json: { success: true, data: property }, status: :ok
-    rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: 'Property not found' }, status: :not_found
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-    end
+    render json: { success: true, data: property }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Property not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def create

@@ -72,4 +72,4 @@ gem 'jwt', '~> 2.5'
 
 gem 'bcrypt', '~> 3.1'
 
-gem "rack-cors", "~> 1.1"
+gem 'rack-cors', '~> 1.1'

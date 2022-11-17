@@ -4,22 +4,18 @@ class Api::V1::CategoriesController < ApplicationController
   ALLOWED_DATA = %i[name].freeze
 
   def index
-    begin
-      @categories = Category.all
-      render json: { success: true, data: @categories }, status: :ok
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-    end
+    @categories = Category.all
+    render json: { success: true, data: @categories }, status: :ok
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
-  def show    
-    begin
-      render json: { success: true, data: @category }, status: :ok
-    rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: 'Category not found' }, status: :not_found
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-    end
+  def show
+    render json: { success: true, data: @category }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Category not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def create

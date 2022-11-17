@@ -2,7 +2,7 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :hosting
   belongs_to :property
-  
+
   validate :check_out_after_check_in
   validate :check_in_smaller_than_today
   validate :check_minimum_cycle
@@ -12,8 +12,11 @@ class Reservation < ApplicationRecord
 
   def check_hosting_belongs_to_property
     hosting = Hosting.find(hosting_id)
-    
-    errors.add(:hosting_id, 'hosting_id must belong to the property_id provided.') if hosting[:property_id] != property_id
+
+    return unless hosting[:property_id] != property_id
+
+    errors.add(:hosting_id,
+               'hosting_id must belong to the property_id provided.')
   end
 
   # rubocop:disable Metrics/MethodLength
@@ -59,4 +62,3 @@ class Reservation < ApplicationRecord
     errors.add(:check_in, 'check_in must be after today')
   end
 end
-

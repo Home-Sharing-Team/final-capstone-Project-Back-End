@@ -39,7 +39,7 @@ class Api::V1::AuthenticationController < ApplicationController
     render json: { success: true, data: @current_user }, status: :ok
   end
 
-  private 
+  private
 
   def register_user_params
     params.permit(:name, :email, :password)

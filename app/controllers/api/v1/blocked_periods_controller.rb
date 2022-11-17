@@ -3,23 +3,19 @@ class Api::V1::BlockedPeriodsController < ApplicationController
   ALLOWED_DATA = %i[start_date end_date property_id].freeze
 
   def index
-    begin
-      @blocked_periods = BlockedPeriod.all
-      render json: { success: true, data: @blocked_periods }, status: :ok
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-    end
+    @blocked_periods = BlockedPeriod.all
+    render json: { success: true, data: @blocked_periods }, status: :ok
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def show
-    begin
-      @blocked_period = BlockedPeriod.find(params[:id])
-      render json: { success: true, data: @blocked_period }, status: :ok
-    rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: 'Blocked period not found' }, status: :not_found
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-    end
+    @blocked_period = BlockedPeriod.find(params[:id])
+    render json: { success: true, data: @blocked_period }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Blocked period not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def create
