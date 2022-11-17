@@ -6,14 +6,16 @@ class Api::V1::AddressesController < ApplicationController
   def index
     @addresses = Address.all
     render json: { success: true, data: @addresses }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Addresses not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def show
     render json: { success: true, data: @address }, status: :ok
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Address not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def create

@@ -5,8 +5,8 @@ class Api::V1::BlockedPeriodsController < ApplicationController
   def index
     @blocked_periods = BlockedPeriod.all
     render json: { success: true, data: @blocked_periods }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Blocked periods not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def show
@@ -14,6 +14,8 @@ class Api::V1::BlockedPeriodsController < ApplicationController
     render json: { success: true, data: @blocked_period }, status: :ok
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Blocked period not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def create

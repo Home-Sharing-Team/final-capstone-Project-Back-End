@@ -1,5 +1,5 @@
 class Address < ApplicationRecord
-  # belongs_to :property
+  has_one :property
   validates :street, presence: true
   validates :city, presence: true
   validates :country, presence: true

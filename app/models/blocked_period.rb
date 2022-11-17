@@ -5,6 +5,7 @@ class BlockedPeriod < ApplicationRecord
 
   validate :end_date_after_start_date
   validate :start_date_greater_than_today
+  validate :check_blocked_periods_conflicts
 
   private
 
@@ -22,5 +23,17 @@ class BlockedPeriod < ApplicationRecord
     return unless start_date < Date.today
 
     errors.add(:start_date, 'must be after today')
+  end
+
+  def check_blocked_periods_conflicts
+    property = Property.find(property_id)
+    @blocked_periods = property.blocked_periods
+
+    @blocked_periods.each do |block|
+      unless start_date > block.end_date || end_date < block.start_date
+        errors.add(:start_date, 'Sorry, the property is not available for your dates')
+        next
+      end
+    end
   end
 end
