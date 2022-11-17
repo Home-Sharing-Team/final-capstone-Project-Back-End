@@ -15,7 +15,19 @@ class Api::V1::ReservationsController < ApplicationController
     begin
       @reservations = Reservation.where(user: params[:userId])
 
-      render json: { success: true, data: @reservations }, status: :ok
+      reservations = JSON.parse(@reservations.to_json({ include: [:hosting, { user: { except: :password_digest } }] }))
+      
+      reservations = reservations.map do |reservation|
+        property_id = reservation["hosting"]["property_id"]
+        property = Property.find(property_id)
+        images = PropertyImage.where(property:).limit(1)
+        property_hash = JSON.parse(property.to_json)
+        property_hash["images"] = images
+        reservation["property"] = property_hash
+        reservation
+      end
+
+      render json: { success: true, data: reservations }, status: :ok
     rescue ActiveRecord::ActiveRecordError
       render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
     end
@@ -39,7 +51,8 @@ class Api::V1::ReservationsController < ApplicationController
       @blocked_period = BlockedPeriod.new(property_id: hosting.property_id, start_date: params[:check_in],
                                           end_date: params[:check_out])
       if @blocked_period.save
-        render json: { success: true, data: @reservation }, status: :created
+        reservation = build_reservation(@reservation)
+        render json: { success: true, data: reservation }, status: :created
       else
         render json: { success: false, error: 'Cannot save reservation' }, status: 500
       end
@@ -61,6 +74,12 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def destroy
+    hosting = Hosting.find(@reservation.hosting_id)
+    reservation_blocked_period = BlockedPeriod.find_by(
+      property_id: hosting.property_id,
+      start_date: @reservation.check_in
+    )
+    reservation_blocked_period.destroy
     @reservation.destroy
     render json: { success: true, data: @reservation }, status: :ok
   end
@@ -75,5 +94,16 @@ class Api::V1::ReservationsController < ApplicationController
 
   def create_params
     params.permit(ALLOWED_DATA)
+  end
+
+  def build_reservation(reservation)
+    reservation_to_send = JSON.parse(reservation.to_json({ include: [:hosting, { user: { except: :password_digest } }] }))
+    property_id = reservation_to_send["hosting"]["property_id"]
+    property = Property.find(property_id)
+    images = PropertyImage.where(property:).limit(1)
+    property_hash = JSON.parse(property.to_json)
+    property_hash["images"] = images
+    reservation_to_send["property"] = property_hash
+    reservation_to_send
   end
 end
