@@ -22,7 +22,7 @@ david = User.create(name: 'David Verde', email: 'david@gmail.com', password: '12
 gabriel = User.create(name: 'Gabriel Santo', email: 'gabriel@test.com', password: '123123') # 3
 
 # Create the Luxury Beachfront Six Palms Villas property
-luxury_property_address = Address.create(street: 'Unknown', city: 'Rocky Point', country: 'Mexico', zip_code: '111111', number: 1) # id = 1
+luxury_property_address = Address.create(street: 'Unknown', city: 'Rocky Point', country: 'Mexico', zip_code: '111111', number: 1, continent: 'North America') # id = 1
 
 luxury_property = Property.create(
   name: 'Luxury Beachfront Six Palms Villas # 1',
@@ -30,12 +30,11 @@ luxury_property = Property.create(
   guest_capacity: 9,
   bedrooms: 3,
   beds: 5,
-  bathrooms: 3,
-  baths: 3,
+  baths: 3,  
   kind: 'house',
   size: 690,
   address_id: 1,
-  user_id: 3,
+  user_id: 3 
 )
 
 PropertyImage.create(property_id: 1, source: 'https://i.ibb.co/XpgGTmY/62ad847e-2f84-49cb-a8a7-35856dc93a20.webp')
@@ -58,8 +57,7 @@ Hosting.create(
   rate: 365, 
   public: true, 
   user_id: 3, 
-  property_id: 1,
-  cleaning_fee: 0
+  property_id: 1
 )
 Hosting.create(
   cycle: 1, 
@@ -67,8 +65,7 @@ Hosting.create(
   rate: 2415, 
   public: true, 
   user_id: 3, 
-  property_id: 1,
-  cleaning_fee: 0
+  property_id: 1
 )
 
 BlockedPeriod.create(

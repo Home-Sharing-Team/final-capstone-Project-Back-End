@@ -6,13 +6,13 @@ class CreatePropertiesTable < ActiveRecord::Migration[7.0]
       t.integer :guest_capacity, null: false
       t.integer :bedrooms, null: false
       t.integer :beds, null: false
-      t.integer :bathrooms, null: false
+      t.integer :baths, null: false
       t.integer :kind, null: false, default: 0
       t.float :size, null: false
 
       t.references :user, null: false, foreign_key: true
       t.references :address, null: false, foreign_key: true
-
+      
       t.timestamps
     end
   end
