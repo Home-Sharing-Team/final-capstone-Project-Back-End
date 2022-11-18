@@ -11,6 +11,10 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.password_digest = nil
     render json: { success: true, data: @user }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'No user found with this ID.' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def create
@@ -18,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: { success: true, data: user }, status: :created
     else
-      render json: { success: false, error: 'Cannot save user' }, status: :bad_request
+      render json: { success: false, error: 'User could not be registered.' }, status: :bad_request
     end
   end
 
@@ -50,6 +54,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create_user_params
-    params.permit(:name, :email, :password)
+    params.permit(:name, :email, :password, :role)
   end
 end

@@ -1,15 +1,23 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :hosting
-  # validates :guests, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
-  # validates :check_in, presence: true, availability: true
-  # validates :check_out, presence: true, availability: true
+  belongs_to :property
+
   validate :check_out_after_check_in
   validate :check_in_smaller_than_today
   validate :check_minimum_cycle
-  validate :check_blocked_periods
+  validate :check_hosting_belongs_to_property
 
   private
+
+  def check_hosting_belongs_to_property
+    hosting = Hosting.find(hosting_id)
+
+    return unless hosting[:property_id] != property_id
+
+    errors.add(:hosting_id,
+               'hosting_id must belong to the property_id provided.')
+  end
 
   # rubocop:disable Metrics/MethodLength
   def check_minimum_cycle
@@ -52,18 +60,5 @@ class Reservation < ApplicationRecord
     return unless check_in < Date.today
 
     errors.add(:check_in, 'check_in must be after today')
-  end
-end
-
-def check_blocked_periods
-  hosting = Hosting.find(hosting_id)
-  property = Property.find(hosting.property_id)
-  @blocked_periods = property.blocked_periods
-
-  @blocked_periods.each do |block|
-    unless check_in > block.end_date || check_out < block.start_date
-      errors.add(:check_in, 'Sorry, the property is not available for your dates')
-      next
-    end
   end
 end
