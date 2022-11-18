@@ -3,9 +3,10 @@ class Api::V1::UsersController < ApplicationController
   ALLOWED_DATA = %i[name email password].freeze
 
   def index
-    if @current_user.role == 1
+    if @current_user.role == "admin"
       @users = User.all
-      render json: { success: true, data: @users }, status: :ok
+      users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
+      render json: { success: true, data: users_to_send }, status: :ok
     else
       render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
     end

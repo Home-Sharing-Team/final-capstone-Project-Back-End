@@ -22,7 +22,7 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def fetch_user_properties
-    @properties = Property.where(user: params[:userId])
+    @properties = Property.where(user: params[:user_id])
     render json: { success: true, data: @properties }, status: :ok
   rescue ActiveRecord::ActiveRecordError
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
