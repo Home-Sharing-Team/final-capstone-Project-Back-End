@@ -1,11 +1,15 @@
 class Api::V1::UsersController < ApplicationController
-  # before_action :authenticate_user, only: [:index]
+  before_action :authenticate_user, only: [:index]
   ALLOWED_DATA = %i[name email password].freeze
 
-  # def index
-  # @users = User.all
-  # render json: { success: true, data: @users }, status: :ok
-  # end
+  def index
+    if @current_user.role == 1
+      @users = User.all
+      render json: { success: true, data: @users }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
+  end
 
   def show
     @user = User.find(params[:id])
