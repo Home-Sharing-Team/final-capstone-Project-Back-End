@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_user, only: %i[index update]
+  before_action :authenticate_user, only: %i[index create update]
   ALLOWED_DATA = %i[name email password].freeze
 
   def index
@@ -23,11 +23,15 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.new(create_user_params)
-    if user.save
-      render json: { success: true, data: user }, status: :created
+    if @current_user.role == "admin"
+      user = User.new(create_user_params)
+      if user.save
+        render json: { success: true, data: user }, status: :created
+      else
+        render json: { success: false, error: 'User could not be registered.' }, status: :bad_request
+      end
     else
-      render json: { success: false, error: 'User could not be registered.' }, status: :bad_request
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
     end
   end
 
