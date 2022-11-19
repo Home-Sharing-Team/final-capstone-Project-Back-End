@@ -53,10 +53,14 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def update
-    if @property.update(update_params)
-      render json: { success: true, data: @property }, status: :ok
+    if @current_user.id == @property.user_id || @current_user.role == "admin"
+      if @property.update(update_params)
+        render json: { success: true, data: @property }, status: :ok
+      else
+        render json: { success: false, errors: 'Cannot update property' }, status: :unprocessable_entity
+      end
     else
-      render json: { success: false, errors: 'Cannot update property' }, status: :unprocessable_entity
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
     end
   end
 
