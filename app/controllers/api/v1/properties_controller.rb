@@ -1,8 +1,9 @@
 class Api::V1::PropertiesController < ApplicationController
   # before_action :authorize_request
+  before_action :authenticate_user, only: %i[create destroy update]
   before_action :find_property, except: %i[fetch_user_properties create index]
 
-  ALLOWED_DATA = %i[name description guest_capacity bedrooms beds bathrooms kind size user_id address_id].freeze
+  ALLOWED_DATA = %i[name description guest_capacity bedrooms beds baths kind size user_id address_id].freeze
 
   def index
     if params[:category]
@@ -64,8 +65,12 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def destroy
-    @property.destroy
-    render json: { success: true, data: @property }, status: :ok
+    if @current_user.id == @property.user_id || @current_user.role == "admin"
+      @property.destroy
+      render json: { success: true, data: @property }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   end
 
   private
