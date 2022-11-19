@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_user, only: %i[index create update]
+  before_action :authenticate_user, only: %i[index create update destroy]
   ALLOWED_DATA = %i[name email password].freeze
 
   def index
@@ -26,7 +26,8 @@ class Api::V1::UsersController < ApplicationController
     if @current_user.role == "admin"
       user = User.new(create_user_params)
       if user.save
-        render json: { success: true, data: user }, status: :created
+        users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
+        render json: { success: true, data: users_to_send }, status: :ok
       else
         render json: { success: false, error: 'User could not be registered.' }, status: :bad_request
       end
@@ -54,8 +55,13 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    render json: { success: true, data: @user }, status: :ok
+    if @current_user.id == @user.id || @current_user.role == "admin"
+      @user.destroy
+      users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
+      render json: { success: true, data: users_to_send }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   end
 
   private
