@@ -12,16 +12,15 @@ class Api::V1::ReservationsController < ApplicationController
 
   def fetch_user_reservations
     if @current_user.id == params[:user_id].to_i
-    @reservations = Reservation.where(user: params[:user_id])
+      @reservations = Reservation.where(user: params[:user_id])
 
-    reservations = JSON.parse(@reservations.to_json({ include: [:hosting, { user: { except: :password_digest } },
-                                                                { property: { include: [:images] } }] }))
+      reservations = JSON.parse(@reservations.to_json({ include: [:hosting, { user: { except: :password_digest } },
+                                                                  { property: { include: [:images] } }] }))
 
-    render json: { success: true, data: reservations }, status: :ok
-  else
-    render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
-  end
- 
+      render json: { success: true, data: reservations }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   rescue ActiveRecord::ActiveRecordError
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end

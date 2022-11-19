@@ -53,7 +53,7 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def update
-    if @current_user.id == @property.user_id || @current_user.role == "admin"
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
       if @property.update(update_params)
         render json: { success: true, data: @property }, status: :ok
       else
@@ -69,7 +69,7 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def destroy
-    if @current_user.id == @property.user_id || @current_user.role == "admin"
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
       @property.destroy
       render json: { success: true, data: @property }, status: :ok
     else

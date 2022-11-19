@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
   ALLOWED_DATA = %i[name email password].freeze
 
   def index
-    if @current_user.role == "admin"
+    if @current_user.role == 'admin'
       @users = User.all
       users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
       render json: { success: true, data: users_to_send }, status: :ok
@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    if @current_user.role == "admin"
+    if @current_user.role == 'admin'
       user = User.new(create_user_params)
       if user.save
         users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
@@ -55,7 +55,7 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    if @current_user.id == @user.id || @current_user.role == "admin"
+    if @current_user.id == @user.id || @current_user.role == 'admin'
       @user.destroy
       users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
       render json: { success: true, data: users_to_send }, status: :ok

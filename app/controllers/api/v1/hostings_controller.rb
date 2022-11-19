@@ -1,6 +1,6 @@
 class Api::V1::HostingsController < ApplicationController
   before_action :authenticate_user, only: %i[create update destroy]
-  #before_action :check_ownership, only: %i[create update destroy]
+  # before_action :check_ownership, only: %i[create update destroy]
   before_action :find_hosting, only: %i[show update destroy]
   ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id property_id].freeze
 
@@ -21,7 +21,7 @@ class Api::V1::HostingsController < ApplicationController
 
   def create
     @property = Property.find(params[:property_id])
-    if @current_user.id == @property.user_id || @current_user.role == "admin"
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
       @hosting = Hosting.new(create_params)
       if @hosting.save
         render json: { success: true, data: @hosting }, status: :created
@@ -34,7 +34,7 @@ class Api::V1::HostingsController < ApplicationController
   end
 
   def update
-    if @current_user.id == @hosting.user_id || @current_user.role == "admin"
+    if @current_user.id == @hosting.user_id || @current_user.role == 'admin'
       if @hosting.update(update_params)
         render json: { success: true, data: @hosting }, status: :ok
       else
@@ -50,7 +50,7 @@ class Api::V1::HostingsController < ApplicationController
   end
 
   def destroy
-    if @current_user.id == @hosting.user_id || @current_user.role == "admin"
+    if @current_user.id == @hosting.user_id || @current_user.role == 'admin'
       @hosting.destroy
       render json: { success: true, data: @hosting }, status: :ok
     else
