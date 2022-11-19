@@ -1,6 +1,6 @@
 class Api::V1::HostingsController < ApplicationController
   before_action :authenticate_user, only: %i[create update destroy]
-  before_action :check_ownership, only: %i[create update destroy]
+  #before_action :check_ownership, only: %i[create update destroy]
   before_action :find_hosting, only: %i[show update destroy]
   ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id property_id].freeze
 
@@ -34,10 +34,14 @@ class Api::V1::HostingsController < ApplicationController
   end
 
   def update
-    if @hosting.update(update_params)
-      render json: { success: true, data: @hosting }, status: :ok
+    if @current_user.id == @hosting.user_id || @current_user.role == "admin"
+      if @hosting.update(update_params)
+        render json: { success: true, data: @hosting }, status: :ok
+      else
+        render json: { success: false, errors: 'Cannot update hosting' }, status: :unprocessable_entity
+      end
     else
-      render json: { success: false, errors: 'Cannot update hosting' }, status: :unprocessable_entity
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
     end
   end
 
@@ -46,8 +50,12 @@ class Api::V1::HostingsController < ApplicationController
   end
 
   def destroy
-    @hosting.destroy
-    render json: { success: true, data: @hosting }, status: :ok
+    if @current_user.id == @hosting.user_id || @current_user.role == "admin"
+      @hosting.destroy
+      render json: { success: true, data: @hosting }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   end
 
   private

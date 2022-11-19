@@ -2,7 +2,7 @@ class Hosting < ApplicationRecord
   belongs_to :user
   belongs_to :property
   has_many :reservations, dependent: :destroy
-  has_many :blocked_periods, dependent: :destroy
+  #has_many :blocked_periods, dependent: :destroy
 
   enum cycle: %i[night week month]
   after_initialize :set_default_cycle, if: :new_record?
