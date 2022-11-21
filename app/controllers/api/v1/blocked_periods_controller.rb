@@ -23,7 +23,7 @@ class Api::V1::BlockedPeriodsController < ApplicationController
     if @blocked_period.save
       render json: { success: true, data: @blocked_period }, status: :created
     else
-      render json: { success: false, error: @blocked_period.errors }, status: :unprocessable_entity
+      render json: { success: false, error: @blocked_period.errors.to_a.flatten.join('. ') }, status: :unprocessable_entity
     end
   end
 

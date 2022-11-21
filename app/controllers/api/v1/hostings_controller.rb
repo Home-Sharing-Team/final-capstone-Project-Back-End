@@ -26,7 +26,7 @@ class Api::V1::HostingsController < ApplicationController
       if @hosting.save
         render json: { success: true, data: @hosting }, status: :created
       else
-        render json: { success: false, error: @hosting.errors }, status: :unprocessable_entity
+        render json: { success: false, error: @hosting.errors.to_a.flatten.join('. ') }, status: :unprocessable_entity
       end
     else
       render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden

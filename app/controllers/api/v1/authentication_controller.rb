@@ -31,7 +31,7 @@ class Api::V1::AuthenticationController < ApplicationController
 
       render json: { success: true, data: user_to_send }, status: :created
     else
-      render json: { success: false, error: user.errors }, status: :bad_request
+      render json: { success: false, error: user.errors.to_a.flatten.join('. ') }, status: :bad_request
     end
   end
 
