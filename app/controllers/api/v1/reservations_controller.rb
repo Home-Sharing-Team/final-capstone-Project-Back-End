@@ -47,7 +47,8 @@ class Api::V1::ReservationsController < ApplicationController
         render json: { success: true, data: reservation }, status: :created
       else
         @blocked_period.destroy
-        render json: { success: false, error: @reservation.errors.to_a.flatten.join('. ') }, status: :unprocessable_entity
+        render json: { success: false, error: @reservation.errors.to_a.flatten.join('. ') },
+               status: :unprocessable_entity
       end
     else
       render json: { success: false, error: @blocked_period.errors.to_a.flatten.join('. ') }, status: :bad_request
