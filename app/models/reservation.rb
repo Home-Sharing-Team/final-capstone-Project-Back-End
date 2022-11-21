@@ -1,6 +1,5 @@
 class Reservation < ApplicationRecord
   belongs_to :user
-  belongs_to :hosting
   belongs_to :property
 
   validate :check_out_after_check_in

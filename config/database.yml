@@ -25,7 +25,7 @@ development:
   <<: *default
   database: final_capstone_Project_Back_End_development
   username: postgres
-  password: malela
+  password: 5621942
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -61,7 +61,7 @@ test:
   <<: *default
   database: final_capstone_Project_Back_End_test
   username: postgres
-  password: malela
+  password: 5621942
   host: 'localhost'
   port: 5432
 

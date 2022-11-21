@@ -33,4 +33,10 @@ class Property < ApplicationRecord
 
     save
   end
+
+  def set_min_hosting_to_nil
+    self.min_cycle_hosting_id = nil
+
+    save
+  end
 end
