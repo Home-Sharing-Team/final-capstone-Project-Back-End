@@ -39,7 +39,4 @@ class BlockedPeriod < ApplicationRecord
       end
     end
   end
-  
-  
-
 end

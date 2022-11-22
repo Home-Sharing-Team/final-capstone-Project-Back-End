@@ -30,7 +30,7 @@ RSpec.describe 'api/v1/hostings', type: :request do
             user_id: { type: :bigint },
             property_id: { type: :bigint }
           },
-          
+
           required: %w[cycle minimum_cycle_amount rate public cleaning_fee user_id property_id]
         }
 

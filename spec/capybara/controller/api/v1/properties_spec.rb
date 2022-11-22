@@ -54,7 +54,7 @@ RSpec.describe 'properties', type: :request do
   end
 
   describe 'PUT /api/v1/properties/:id' do
-    subject { put "/api/v1/properties/#{property_id}", params: params }
+    subject { put "/api/v1/properties/#{property_id}", params: }
 
     context 'when the property does not exist' do
       let(:property_id) { 'invalid' }
@@ -65,7 +65,4 @@ RSpec.describe 'properties', type: :request do
       end
     end
   end
-
-  
 end
-
