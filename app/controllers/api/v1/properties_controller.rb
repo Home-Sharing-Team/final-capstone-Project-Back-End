@@ -3,7 +3,7 @@ class Api::V1::PropertiesController < ApplicationController
   before_action :authenticate_user, only: %i[create destroy update]
   before_action :find_property, except: %i[fetch_user_properties create index]
 
-  ALLOWED_DATA = %i[name description guest_capacity bedrooms beds baths kind size user_id address_id].freeze
+  ALLOWED_DATA = %i[name description guest_capacity bedrooms beds baths kind size].freeze
 
   def index
     if params[:category]
@@ -30,10 +30,9 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def show
-    property = JSON.parse(@property.to_json({ include: [:images, :blocked_periods, :categories, :min_cycle_hosting,
-                                                        :address, :hostings, { user: { except: :password_digest } }] }))
+    property_to_send = build_property(@property)
 
-    render json: { success: true, data: property }, status: :ok
+    render json: { success: true, data: property_to_send }, status: :ok
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Property not found' }, status: :not_found
   rescue ActiveRecord::ActiveRecordError
@@ -41,15 +40,42 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def create
-    property = Property.new(create_params)
+    address = Address.new(create_address_params)
+    
+    if address.save
+      @property = Property.new(create_property_params)
+      @property.user_id = @current_user.id
+      @property.address_id = address.id
 
-    if property.save
-      property.categories << array_of_categories
+      if @property.save
+        params[:categories].each do |category_name|
+          category = Category.find_by(name: category_name)
+          PropertyCategory.create(
+            property_id: @property.id,
+            category_id: category.id
+          )
+        end
+        
+        latests_category = Category.find_by(name: "latests")
+        PropertyCategory.create(
+          property_id: @property.id,
+          category_id: latests_category.id
+        )
 
-      render json: { success: true, data: property }, status: :created
+        property_to_send = build_property(@property)
+        render json: { success: true, data: property_to_send }, status: :created
+      else
+        address.destroy
+        render json: { success: false, error: 'Could not create property.' }, status: :bad_request
+      end
     else
-      render json: { success: false, error: 'Cannot save property' }, status: :bad_request
+      render json: { success: false, error: 'Could not create the property address.' }, status: :bad_request
     end
+
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Resource not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def update
@@ -79,19 +105,22 @@ class Api::V1::PropertiesController < ApplicationController
 
   private
 
-  def array_of_categories
-    category_test = Category.find_by_id(1)
-    category_test2 = Category.find_by_id(2)
-    [category_test, category_test2]
-  end
-
   def find_property
     @property = Property.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Property not found' }, status: :not_found
   end
 
-  def create_params
+  def build_property(property)
+    JSON.parse(property.to_json({ include: [:images, :blocked_periods, :categories, :min_cycle_hosting,
+                                                        :address, :hostings, { user: { except: :password_digest } }] }))
+  end
+
+  def create_property_params
     params.permit(ALLOWED_DATA)
+  end
+
+  def create_address_params
+    params.require(:address).permit(:street, :number, :city, :country, :zip_code, :continent)
   end
 end

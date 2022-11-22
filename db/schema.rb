@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
 
   create_table "properties", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description", null: false
+    t.text "description", null: false
     t.integer "guest_capacity", null: false
     t.integer "bedrooms", null: false
     t.integer "beds", null: false

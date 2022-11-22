@@ -1,5 +1,6 @@
 
 # Create categories
+latests = Category.create(name: 'latests')
 beachfront = Category.create(name: 'beachfront') # id = 1
 mansions = Category.create(name: 'mansions') # 2
 lakefront = Category.create(name: 'lakefront') # 3

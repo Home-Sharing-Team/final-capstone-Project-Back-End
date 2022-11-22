@@ -2,7 +2,7 @@ class CreatePropertiesTable < ActiveRecord::Migration[7.0]
   def change
     create_table :properties do |t|
       t.string :name, null: false
-      t.string :description, null: false
+      t.text :description, null: false
       t.integer :guest_capacity, null: false
       t.integer :bedrooms, null: false
       t.integer :beds, null: false
