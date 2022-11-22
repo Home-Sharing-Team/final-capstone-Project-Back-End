@@ -8,9 +8,9 @@ class Api::V1::PropertiesController < ApplicationController
   def index
     if params[:category]
       category = Category.find(params[:category])
-      @properties = category.properties
+      @properties = category.properties.where(is_public: true)
     else
-      @properties = Property.all
+      @properties = Property.where(is_public: true)
     end
 
     properties = JSON.parse(@properties.to_json({ include: %i[images min_cycle_hosting address] }))
