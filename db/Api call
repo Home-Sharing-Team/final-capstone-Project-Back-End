@@ -1,16 +1,23 @@
 format for create Property API
 {
-"name": "paloalto",
+    "name": "paloaltotest",
 "description": "2 floor house",
 "guest_capacity": 2,
 "bedrooms": 3,
 "beds": 4,
-"bathrooms": 1,
+"baths": 1,
 "size": 100,
-"user_id": 1,
-"address_id": 1,
-"kind": 0
-}
+"kind": "house",
+"address": {
+ "street": "23th",
+ "city": "mogadishu",
+ "country": "somalia",
+ "zip_code": "111111",
+ "number": 1,
+ "continent": "Africa"
+ },
+      "categories": ["beachfront", "mansions"]
+   }
 
 format for create Address API
 {

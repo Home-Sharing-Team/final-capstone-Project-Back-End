@@ -6,6 +6,8 @@ RSpec.configure do |config|
   # to ensure that it's configured to serve Swagger from the same folder
   config.swagger_root = Rails.root.join('swagger').to_s
 
+
+
   # Define one or more Swagger documents and provide global metadata for each one
   # When you run the 'rswag:specs:swaggerize' rake task, the complete Swagger will
   # be generated at the provided relative path under swagger_root

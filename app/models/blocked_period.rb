@@ -30,10 +30,16 @@ class BlockedPeriod < ApplicationRecord
     @blocked_periods = property.blocked_periods
 
     @blocked_periods.each do |block|
+      p start_date
+      p block.end_date
+      p block.start_date
       unless start_date > block.end_date || end_date < block.start_date
         errors.add(:start_date, '- the property is not available for your dates.')
         next
       end
     end
   end
+  
+  
+
 end
