@@ -41,9 +41,23 @@ class Api::V1::PropertiesController < ApplicationController
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
+  def show_owner_property
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
+      property_to_send = build_property(@property)
+
+      render json: { success: true, data: property_to_send }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Property not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+  end
+
   def create
     address = Address.new(create_address_params)
-    
+
     if address.save
       @property = Property.new(create_property_params)
       @property.user_id = @current_user.id
@@ -57,8 +71,8 @@ class Api::V1::PropertiesController < ApplicationController
             category_id: category.id
           )
         end
-        
-        latests_category = Category.find_by(name: "latests")
+
+        latests_category = Category.find_by(name: 'latests')
         PropertyCategory.create(
           property_id: @property.id,
           category_id: latests_category.id
@@ -73,7 +87,6 @@ class Api::V1::PropertiesController < ApplicationController
     else
       render json: { success: false, error: 'Could not create the property address.' }, status: :bad_request
     end
-
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Resource not found' }, status: :not_found
   rescue ActiveRecord::ActiveRecordError
@@ -115,7 +128,7 @@ class Api::V1::PropertiesController < ApplicationController
 
   def build_property(property)
     JSON.parse(property.to_json({ include: [:images, :blocked_periods, :categories, :min_cycle_hosting,
-                                                        :address, :hostings, { user: { except: :password_digest } }] }))
+                                            :address, :hostings, { user: { except: :password_digest } }] }))
   end
 
   def create_property_params

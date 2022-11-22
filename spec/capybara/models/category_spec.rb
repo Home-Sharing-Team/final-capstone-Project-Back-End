@@ -13,4 +13,9 @@ RSpec.describe Category, type: :model do
     @category.name = nil
     expect(@category).to_not be_valid
   end
+
+  it 'is not valid if name is not unique' do
+    @category2 = Category.create(name: 'Tundra')
+    expect(@category2).to_not be_valid
+  end
 end

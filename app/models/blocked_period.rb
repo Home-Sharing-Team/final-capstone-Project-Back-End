@@ -27,7 +27,6 @@ class BlockedPeriod < ApplicationRecord
 
   def check_blocked_periods_conflicts
     property = Property.find(property_id)
-    p property
     @blocked_periods = property.blocked_periods
 
     @blocked_periods.each do |block|

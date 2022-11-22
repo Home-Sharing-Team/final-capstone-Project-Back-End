@@ -1,7 +1,7 @@
 class Api::V1::ReservationsController < ApplicationController
   before_action :authenticate_user, only: %i[create destroy fetch_user_reservations]
   before_action :find_reservation, only: %i[show update destroy]
-  ALLOWED_DATA = %i[check_in check_out guests property_id].freeze
+  ALLOWED_DATA = %i[check_in check_out user_id guests price property_id].freeze
 
   def index
     @reservations = Reservation.all
@@ -34,29 +34,22 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def create
-    begin
-      @blocked_period = BlockedPeriod.new(property_id: params[:property_id], start_date: params[:check_in],
-                                          end_date: params[:check_out])
-      if @blocked_period.save
-        @reservation = Reservation.new(create_params)
-        @reservation.user_id = @current_user.id
-        @reservation.blocked_period_id = @blocked_period.id
-        
-        if @reservation.save
-          reservation = build_reservation(@reservation)
-          render json: { success: true, data: reservation }, status: :created
-        else
-          @blocked_period.destroy
-          render json: { success: false, error: @reservation.errors.to_a.flatten.join('. ') },
-                status: :unprocessable_entity
-        end
+    @blocked_period = BlockedPeriod.new(property_id: params[:property_id], start_date: params[:check_in],
+                                        end_date: params[:check_out])
+    if @blocked_period.save
+      @reservation = Reservation.new(create_params)
+      @reservation.blocked_period_id = @blocked_period.id
+      p @reservation
+      if @reservation.save
+        reservation = build_reservation(@reservation)
+        render json: { success: true, data: reservation }, status: :created
       else
-        render json: { success: false, error: @blocked_period.errors.to_a.flatten.join('. ') }, status: :bad_request
+        @blocked_period.destroy
+        render json: { success: false, error: @reservation.errors.to_a.flatten.join('. ') },
+               status: :unprocessable_entity
       end
-    rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: 'No property found with this ID.' }, status: :not_found
-    rescue ActiveRecord::ActiveRecordError
-      render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+    else
+      render json: { success: false, error: @blocked_period.errors.to_a.flatten.join('. ') }, status: :bad_request
     end
   end
 
@@ -97,7 +90,7 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def build_reservation(reservation)
-    JSON.parse(reservation.to_json({ include: [{ user: { except: :password_digest } },
+    JSON.parse(reservation.to_json({ include: [:hosting, { user: { except: :password_digest } },
                                                { property: { include: [:images] } }] }))
   end
 end
