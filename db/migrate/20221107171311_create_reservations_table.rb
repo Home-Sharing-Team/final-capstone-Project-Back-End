@@ -7,7 +7,6 @@ class CreateReservationsTable < ActiveRecord::Migration[7.0]
       t.float :price, null: false
       
       t.references :user, null: false, foreign_key: true
-      t.references :hosting, null: false, foreign_key: true
       t.references :blocked_period, null: false, foreign_key: true
       t.references :property, null: false, foreign_key: true
       

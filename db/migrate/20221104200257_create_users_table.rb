@@ -6,6 +6,9 @@ class CreateUsersTable < ActiveRecord::Migration[7.0]
       t.string :password_digest, null: false
       t.integer :role, null: false, default: 0
       t.string :avatar
+      t.text :about
+      t.string :native_language
+      t.string :country
 
       t.timestamps
     end

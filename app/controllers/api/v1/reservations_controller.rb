@@ -39,7 +39,7 @@ class Api::V1::ReservationsController < ApplicationController
     if @blocked_period.save
       @reservation = Reservation.new(create_params)
       @reservation.blocked_period_id = @blocked_period.id
-      p @reservation
+      
       if @reservation.save
         reservation = build_reservation(@reservation)
         render json: { success: true, data: reservation }, status: :created

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_21_200823) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,7 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_200823) do
     t.integer "cycle", null: false
     t.integer "minimum_cycle_amount", null: false
     t.float "rate", null: false
-    t.boolean "public", default: true, null: false
     t.float "cleaning_fee", default: 0.0, null: false
     t.bigint "user_id", null: false
     t.bigint "property_id", null: false
@@ -63,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_200823) do
     t.integer "baths", null: false
     t.integer "kind", default: 0, null: false
     t.float "size", null: false
+    t.boolean "is_public", default: false, null: false
     t.bigint "user_id", null: false
     t.bigint "address_id", null: false
     t.datetime "created_at", null: false
@@ -111,6 +111,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_200823) do
     t.string "password_digest", null: false
     t.integer "role", default: 0, null: false
     t.string "avatar"
+    t.text "about"
+    t.string "native_language"
+    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

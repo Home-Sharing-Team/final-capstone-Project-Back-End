@@ -9,6 +9,7 @@ class CreatePropertiesTable < ActiveRecord::Migration[7.0]
       t.integer :baths, null: false
       t.integer :kind, null: false, default: 0
       t.float :size, null: false
+      t.boolean :is_public, null: false, default: false
 
       t.references :user, null: false, foreign_key: true
       t.references :address, null: false, foreign_key: true
