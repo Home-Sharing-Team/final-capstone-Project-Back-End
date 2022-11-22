@@ -29,6 +29,8 @@ class Property < ApplicationRecord
                                   hostings_hash['week'].id
                                 elsif hostings_hash['month']
                                   hostings_hash['month'].id
+                                else
+                                  nil
                                 end
 
     save

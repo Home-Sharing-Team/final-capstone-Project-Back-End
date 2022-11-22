@@ -34,8 +34,9 @@ luxury_property = Property.create(
   kind: 'house',
   size: 690,
   address_id: 1,
-  user_id: 3 
-)
+  user_id: 3,
+  is_public: true
+) 
 
 PropertyImage.create(property_id: 1, source: 'https://i.ibb.co/XpgGTmY/62ad847e-2f84-49cb-a8a7-35856dc93a20.webp')
 PropertyImage.create(property_id: 1, source: 'https://i.ibb.co/103Qnyr/d88dfa7d-113a-4e26-b3fd-d819df85a446.webp')
@@ -55,15 +56,13 @@ Hosting.create(
   cycle: 0, 
   minimum_cycle_amount: 3, 
   rate: 365, 
-  public: true, 
   user_id: 3, 
   property_id: 1
-)
+)  
 Hosting.create(
   cycle: 1, 
   minimum_cycle_amount: 1, 
   rate: 2415, 
-  public: true, 
   user_id: 3, 
   property_id: 1
 )
@@ -85,9 +84,9 @@ BlockedPeriod.create(
 # Property.create(name: 'Casa 1', description: 'Casa 1', guest_capacity: 1, bedrooms: 1, beds: 1, bathrooms: 1, kind: 'apartment', address_id: 1, size: 1, user_id: 1)
 # Property.create(name: 'Casa 2', description: 'Casa 2', guest_capacity: 2, bedrooms: 2, beds: 2, bathrooms: 2, kind: 'house', address_id: 2, size: 2, user_id: 2)
 # Property.create(name: 'Casa 3', description: 'Casa 3', guest_capacity: 3, bedrooms: 3, beds: 3, bathrooms: 3, kind: 'apartment', address_id: 1, size: 3, user_id: 2)
-# Hosting.create(cycle: 0, minimum_cycle_amount: 1, rate: 1, public: true, cleaning_fee: 1, user_id: 1, property_id: 1)
-# Hosting.create(cycle: 1, minimum_cycle_amount: 1, rate: 1, public: true, cleaning_fee: 1, user_id: 1, property_id: 1)
-# Hosting.create(cycle: 2, minimum_cycle_amount: 2, rate: 12, public: true, cleaning_fee: 1, user_id: 2, property_id: 2)
+# Hosting.create(cycle: 0, minimum_cycle_amount: 1, rate: 1, cleaning_fee: 1, user_id: 1, property_id: 1)
+# Hosting.create(cycle: 1, minimum_cycle_amount: 1, rate: 1, cleaning_fee: 1, user_id: 1, property_id: 1)
+# Hosting.create(cycle: 2, minimum_cycle_amount: 2, rate: 12, cleaning_fee: 1, user_id: 2, property_id: 2)
 # BlockedPeriod.create(start_date: '2023-01-01', end_date: '20213-02-02', property_id: 1)
 # Reservation.create(check_in: '2023-03-01', check_out: '2023-06-02', guests: 1, user_id: 1, hosting_id: 2, price: 100)
 # PropertyImage.create(property_id: 1, source: 'https://images.unsplash.com/photo-1610078888888-1b1b1b1b1b1b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80')

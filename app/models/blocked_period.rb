@@ -14,7 +14,7 @@ class BlockedPeriod < ApplicationRecord
 
     return unless end_date < start_date
 
-    errors.add(:end_date, 'must be after the start date')
+    errors.add(:end_date, 'must be after the start date.')
   end
 
   def start_date_greater_than_today
@@ -22,7 +22,7 @@ class BlockedPeriod < ApplicationRecord
 
     return unless start_date < Date.today
 
-    errors.add(:start_date, 'must be after today')
+    errors.add(:start_date, 'must be after today.')
   end
 
   def check_blocked_periods_conflicts
@@ -32,7 +32,7 @@ class BlockedPeriod < ApplicationRecord
 
     @blocked_periods.each do |block|
       unless start_date > block.end_date || end_date < block.start_date
-        errors.add(:start_date, 'Sorry, the property is not available for your dates')
+        errors.add(:start_date, '- the property is not available for your dates.')
         next
       end
     end
