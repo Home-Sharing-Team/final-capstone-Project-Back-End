@@ -1,21 +1,21 @@
 
 # Create categories
-latests = Category.create(name: 'latests')
-beachfront = Category.create(name: 'beachfront') # id = 1
-mansions = Category.create(name: 'mansions') # 2
-lakefront = Category.create(name: 'lakefront') # 3
-amazing_views = Category.create(name: 'amazing views') # 4
-countryside = Category.create(name: 'countryside') # 5
-tiny_homes = Category.create(name: 'tiny homes') # 6
-iconic_cities = Category.create(name: 'iconic cities') # 7
-luxe = Category.create(name: 'luxe') # 8
-surfing = Category.create(name: 'surfing') # 9
-skiing = Category.create(name: 'skiing') # 10
-houseboats = Category.create(name: 'houseboats') # 11
-desert = Category.create(name: 'desert') # 12
-historical_homes = Category.create(name: 'historical homes') # 13
-beach = Category.create(name: 'beach') # 14
-castles = Category.create(name: 'castles') # 15
+latests = Category.create(name: 'latests') # id = 1
+beachfront = Category.create(name: 'beachfront') # id = 2
+mansions = Category.create(name: 'mansions') # 3
+lakefront = Category.create(name: 'lakefront') # 4
+amazing_views = Category.create(name: 'amazing views') # 5
+countryside = Category.create(name: 'countryside') # 6
+tiny_homes = Category.create(name: 'tiny homes') # 7
+iconic_cities = Category.create(name: 'iconic cities') # 8
+luxe = Category.create(name: 'luxe') # 9
+surfing = Category.create(name: 'surfing') # 10
+skiing = Category.create(name: 'skiing') # 11
+houseboats = Category.create(name: 'houseboats') # 12
+desert = Category.create(name: 'desert') # 13
+historical_homes = Category.create(name: 'historical homes') # 14
+beach = Category.create(name: 'beach') # 15
+castles = Category.create(name: 'castles') # 16
 
 # Create users
 admin = User.create(name: "Mr Admin", email: "admin@test.com", password: "123123", role: 1) # 1
@@ -48,10 +48,10 @@ PropertyImage.create(property_id: 1, source: 'https://i.ibb.co/vz1Nrkj/70e4749a-
 PropertyImage.create(property_id: 1, source: 'https://i.ibb.co/hXWm9Cm/d62454a1-c7e9-4550-bd56-478cf3d09b65.webp')
 PropertyImage.create(property_id: 1, source: 'https://i.ibb.co/nj5Kd7c/2e505f86-c67c-4353-a542-5ea1eab24f51.webp')
 
-PropertyCategory.create(property_id: 1, category_id: 1)
 PropertyCategory.create(property_id: 1, category_id: 2)
-PropertyCategory.create(property_id: 1, category_id: 8)
-PropertyCategory.create(property_id: 1, category_id: 14)
+PropertyCategory.create(property_id: 1, category_id: 3)
+PropertyCategory.create(property_id: 1, category_id: 9)
+PropertyCategory.create(property_id: 1, category_id: 15)
 
 Hosting.create(
   cycle: 0, 

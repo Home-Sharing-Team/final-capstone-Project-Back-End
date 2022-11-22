@@ -24,7 +24,9 @@ class Api::V1::PropertiesController < ApplicationController
 
   def fetch_user_properties
     @properties = Property.where(user: params[:user_id])
-    render json: { success: true, data: @properties }, status: :ok
+    properties_to_send = JSON.parse(@properties.to_json({ include: %i[images min_cycle_hosting address] }))
+
+    render json: { success: true, data: properties_to_send }, status: :ok
   rescue ActiveRecord::ActiveRecordError
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
