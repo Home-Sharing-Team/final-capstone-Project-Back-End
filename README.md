@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End">
- <img src="/images/Home-Sharing-Project.png" alt="Logo" width="150" height="150">
+ <img src="/images/Home-Sharing-Project.png" alt="Logo" width="165" height="165">
   </a>
 
   <h1 align="center"><strong>Home Sharing App</strong></h1>
@@ -18,8 +18,7 @@
   </p>
 </p>
 
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
+## Table of Contents:
 
 * [About the Project](#about-the-project)
 * [Frontend repository](#frontend-repository)
@@ -33,8 +32,7 @@
 * [Acknowledgements](#acknowledgements)
 * [License](#license)
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+## About The Project:
 This is the final capstone project for the Full Stack Developer Program at Microverse.
 
 The Home Sharing App is a full responsive app that provides the service for conecting home owners wanting to rent their properties and potential clients, enablig the creation of reservations of periods of time on selected properties.
@@ -132,9 +130,8 @@ This project was built using these technologies:
 * Visual Studio
 
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=compact)](https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=darioalessior&layout=compact)](https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End)
 
-<!-- INSTALLATION -->
 ## Usage:
 
 To have this app on your pc, you need to:
