@@ -166,12 +166,16 @@ Give a :star: if you like this project! (click here)
 
 - This is My **GitHub**: [![@David-Verde](https://img.shields.io/github/followers/omarramoun?label=David&style=social)](https://github.com/David-Verde)
 - This is My **Twitter**: [![@Unyielding1](https://img.shields.io/twitter/follow/omarramoun?label=David16&style=social)](https://twitter.com/UnyieldingOne)
-)
+
 
 👤 Dario Alessio
 
 GitHub: https://github.com/DarioAlessioR
+
+[![@DarioAlessioR](https://img.shields.io/github/followers/omarramoun?label=Dario&style=social)](https://github.com/DarioAlessioR)
+
 Slack: https://microverse-students.slack.com/team/U039GCFRK9B
+
 LinkedIn: https://www.linkedin.com/in/dario-alessio-3a3b7911b
 
 ## License:
