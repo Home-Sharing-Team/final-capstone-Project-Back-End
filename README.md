@@ -28,7 +28,8 @@
 * [Usage](#usage)
 * [Testing](#testing)
 * [Kanban Board](#kanban-board)
-* [Contributors](#contributors)
+* [Authors](#authors)
+* [Show your support](#show-your-support)
 * [Acknowledgements](#acknowledgements)
 * [License](#license)
 
@@ -162,9 +163,6 @@ Link to the project Kanban board: <a href="https://github.com/orgs/Home-Sharing-
 
 Link to the screenshot of the initial state of the Kanban board: <a href="https://github.com/orgs/Home-Sharing-Team/projects/2">Click here</a>.
 
-## Show your support:
-
-Give a :star: if you like this project!
 
 ## Authors:
 
@@ -201,6 +199,18 @@ Give a :star: if you like this project!
 
 - This is My **LinkedIn**: https://www.linkedin.com/in/dario-alessio-3a3b7911b
 
+
+## Show your support:
+
+Give a :star: if you like this project!
+
+
+## Acknowledgements:
+
+- Based on the [design](https://creativecommons.org/licenses/by-nc/4.0/) by The Creative Commons
+- Hat tip to anyone whose code was used
+- Microverse
+- Our supportive families 😊
+
 ## License:
 This project is [MIT](https://github.com/David-Verde/final-capstone-Project-Back-End/blob/develop/LICENSE) licensed.
-
