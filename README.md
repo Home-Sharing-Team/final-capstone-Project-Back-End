@@ -161,7 +161,7 @@ Tu run the test in your terminal, please type: rspec spec/capybara
 
 Link to the project Kanban board: <a href="https://github.com/orgs/Home-Sharing-Team/projects/2">Click here</a>.
 
-Link to the screenshot of the initial state of the Kanban board: <a href="https://github.com/orgs/Home-Sharing-Team/projects/2">Click here</a>.
+Link to the screenshot of the initial state of the Kanban board: <a href="https://user-images.githubusercontent.com/64566209/199840132-dde39cfe-be8a-4172-9bf5-f5d0485ce13f.png">Click here</a>.
 
 
 ## Authors:
