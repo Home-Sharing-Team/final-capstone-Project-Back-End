@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End">
- <img src="/images/Home-Sharing-Project.png" alt="Logo" width="80" height="80">
+ <img src="/images/Home-Sharing-Project.png" alt="Logo" width="150" height="150">
   </a>
 
   <h1 align="center"><strong>Home Sharing App</strong></h1>
@@ -27,7 +27,7 @@
 * [Entity Relation Diagram](#entity-relation-diagram)
 * [Built With](#built-with)
 * [Usage](#usage)
-* [Automated Test](#automated-test)
+* [Testing](#testing)
 * [Kanban Board](#kanban-board)
 * [Contributors](#contributors)
 * [Acknowledgements](#acknowledgements)
@@ -111,7 +111,7 @@ E) In the navbar I can see a button to show the list of all the reservations cre
   </a>
 
 ## Built With:
-This project was built using these technologies.
+This project was built using these technologies:
 * Ruby
 * Ruby on Rails
 * React
@@ -131,6 +131,8 @@ This project was built using these technologies.
 * GitHub, Gitflow
 * Visual Studio
 
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=compact)](https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End)
 
 <!-- INSTALLATION -->
 ## Usage:
@@ -152,14 +154,14 @@ https://github.com/David-Verde/final-capstone-Project-Back-End.git
 
   Run Rails s command to run Ruby on Rails console
 
-### Run tests
+## Testing:
 
-    rspec spec/capybara
+Tu run the test in your terminal, please type: rspec spec/capybara
   
 
 ## Show your support:
 
-Give a :star: if you like this project!
+Give a :star: if you like this project! (click here)
 
 ## Authors:
 
