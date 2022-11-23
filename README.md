@@ -74,7 +74,7 @@ A) When I go to the home page:
 
 3. I can also see a select button to select a country to show properties for that country only.
 4. After selecting a country, I can see a title indicating the chosen country, and the list of properties for that country with 1 photo, property title, country, city,  and the rate per night, week, etc.  Also, inside a parenthesis, must be the minimum time for rent.
-5. After clicking on one photo or property title, I can see all I can see in A.2. But the button or link to go back must take me to the country list page.
+5. After clicking on one photo or property title, I can see all the same information shown in A.2. But the button or link to go back must take me to the country list page.
 6. When I click the reservation button, I can see the fields to enter check_in and check-out dates (or a calendar to select dates), and also a field to enter the number of guests that will stay in the property (the entered number of guests must be greater than 0, and smaller or equal to the guest capacity of the property). 
 7. I can see a “Check dates” button to check if the requested reservation period is available.
 8. After clicking on this button, I can see the messages: “The property is available for your requested dates” or “Sorry, the property is not available for your requested dates. Please try a different time period”.
@@ -153,7 +153,7 @@ https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End.git
 
 ## Testing:
 
-Tu run the test in your terminal, please type: rspec spec/capybara
+Tu run the test in your terminal, please type: `rspec spec/capybara`
 
 
 ## Kanban Board:
@@ -206,7 +206,7 @@ Give a :star: if you like this project!
 
 ## Acknowledgements:
 
-- Based on the [design](https://creativecommons.org/licenses/by-nc/4.0/) by The Creative Commons
+- Based on the [design](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) by [Murat Korkmaz](https://www.behance.net/muratk) on Behance.
 - Hat tip to anyone whose code was used
 - Microverse
 - Our supportive families 😊
