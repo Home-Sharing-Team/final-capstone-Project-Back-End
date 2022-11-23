@@ -131,8 +131,6 @@ This project was built using these technologies:
 * Visual Studio
 
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=darioalessior&layout=compact)](https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End)
-
 ## Usage:
 
 To have this app on your pc, you need to:
