@@ -6,7 +6,7 @@
  <img src="/images/Home-Sharing-Project.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center"><strong>Home Sharing App</strong></h3>
+  <h1 align="center"><strong>Home Sharing App</strong></h1>
 
   <p align="center">
     This is the final capstone project for the Full Stack Developer Program at Microverse
@@ -34,12 +34,17 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Final Capstone Project Back-End production.
+This is the final capstone project for the Full Stack Developer Program at Microverse.
 
+The Home Sharing App is a full responsive app that provides the service for conecting home owners wanting to rent their properties and potential clients.
+
+The properties owners can customize the terms of the rental for each property, which lets the app to be used for short term rental (like short vacations at the beach) or for long term rental, enablig the app to point to different market segments.
 
 ## Project requirements:
 
-The project requirements are according to the following User stories:
+The basic project requirements are defined by Microverse and can be seen in this <a href="https://github.com/microverseinc/curriculum-final-capstone/blob/main/projects/business_requirements.md#project-requirements">link</a>. 
+
+curricullum and can be according to the following User stories:
 
 A) When I go to the home page:
 1. I can see a selection of the latest properties to rent on the home page, with 1 photo, property title, country, city,  and the rate per cycle. Also, inside a parenthesis, must be the minimum_cycle_amount.
