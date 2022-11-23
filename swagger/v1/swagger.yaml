@@ -1,36 +1,24 @@
 ---
 openapi: 3.0.1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # optional, for documentation purposes only
+
+security:
+  - bearerAuth: []
 info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/addresses":
-    get:
-      summary: list addresses
-      tags:
-      - Addresses
-      description: Retrieves all addresses
 
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              examples:
-                successful:
-                  value:
-                    success: true
-                    data:
-                    - street: address Street
-                      number: address number
-                      city: address city
-                      country: address country
-                      zip_code: 531351
+  "/api/v1/auth/register":
     post:
-      summary: create address
+      summary: register
       tags:
-      - Addresses
-      description: create a new address
+      - Registration
       parameters: []
       responses:
         '200':
@@ -41,58 +29,21 @@ paths:
             schema:
               type: object
               properties:
-                street:
+                name:
                   type: string
-                number:
-                  type: integer
-                city:
+                email:
                   type: string
-                country:
-                  type: string
-                zip_code:
+                password:
                   type: string
               required:
-              - street
-              - number
-              - city
-              - country
-              - zip_code
-  "/api/v1/addresses/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
-    get:
-      summary: show address
+              - name
+              - email
+              - password
+  "/api/v1/auth/sign_in":
+    post:
+      summary: sign in
       tags:
-      - Addresses
-      description: Show all addresses
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              examples:
-                successful:
-                  value:
-                    success: true
-                    data:
-                    - Id: 1
-                      street: address Street
-                      number: address number
-                      city: address city
-                      country: address country
-                      zip_code: 531351
-                      created_at: "2022-11-11T20:42:52.595Z"
-                      updated_at: "2022-11-11T20:42:52.595Z"
-    patch:
-      summary: update address
-      tags:
-      - Addresses
-      description: Edit address
+      - Authentication
       parameters: []
       responses:
         '200':
@@ -103,69 +54,35 @@ paths:
             schema:
               type: object
               properties:
-                street:
+                email:
                   type: string
-                number:
-                  type: integer
-                city:
-                  type: string
-                country:
-                  type: string
-                zip_code:
+                password:
                   type: string
               required:
-              - street
-              - number
-              - city
-              - country
-              - zip_code
-    put:
-      summary: update address
-      tags:
-      - Addresses
-      description: Edit address
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                street:
-                  type: string
-                number:
-                  type: integer
-                city:
-                  type: string
-                country:
-                  type: string
-                zip_code:
-                  type: string
-              required:
-              - street
-              - number
-              - city
-              - country
-              - zip_code
+              - email
+              - password
+  "/api/v1/auth/sign_out":
     delete:
-      summary: delete address
+      summary: sign out
       tags:
-      - Addresses
-      description: Delete address
+      - Authentication
+      parameters: []
       responses:
         '200':
           description: successful
-          content:
-            application/json:
-              examples:
-                succesful_logout:
-                  value:
-                    code: 202
-                    data:
-                      message: Address delete successfully   
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
   "/api/v1/blocked_periods":
     get:
       summary: list blocked_periods
@@ -239,56 +156,7 @@ paths:
                       property_id: 2
                       created_at: "2022-11-09T17:04:50.717Z"
                       updated_at: "2022-11-09T17:04:50.717Z"
-    patch:
-      summary: update blocked_period
-      tags:
-      - Blocked_periods
-      description: Edit Blocked_period
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                start_date:
-                  type: string
-                end_date:
-                  type: string
-                property_id:
-                  type: integer
-              required:
-              - start_date
-              - end_date
-              - property_id
-    put:
-      summary: update blocked_period
-      tags:
-      - Blocked_periods
-      description: Edit Blocked_period
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                start_date:
-                  type: string
-                end_date:
-                  type: string
-                property_id:
-                  type: integer
-              required:
-              - start_date
-              - end_date
-              - property_id
+    
     delete:
       summary: delete blocked_period
       tags:
@@ -322,106 +190,11 @@ paths:
                     success: true
                     data:
                     - name: Category name
-    post:
-      summary: create category
-      tags:
-      - Categories
-      description: Create a new Categorie
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-              required:
-              - name
-  "/api/v1/categories/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
-    get:
-      summary: show category
-      tags:
-      - Categories
-      description: Show all Categories
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              examples:
-                successful:
-                  value:
-                    success: true
-                    data:
-                    - Id: 4 
-                      name: Category name
-                      created_at: "2022-11-09T21:37:35.472Z"
-                      updated_at: "2022-11-09T21:37:35.472Z"
-    patch:
-      summary: update category
-      tags:
-      - Categories
-      description: Edit Category
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-              required:
-              - name
-    put:
-      summary: update category
-      tags:
-      - Categories
-      description: Edit Category
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-              required:
-              - name
-    delete:
-      summary: delete category
-      tags:
-      - Categories
-      description: Delete a Category
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              examples:
-                succesful_logout:
-                  value:
-                    code: 202
-                    data:
-                      message: Category delete successfully   
+    
+    
+    
+          
+
   "/api/v1/hostings":
     get:
       summary: list hostings
@@ -441,11 +214,11 @@ paths:
                     - cycle: Property name
                       minimum_cycle_amount: Week
                       rate: 200
-                      public: true
                       cleaning_fee: 30
                       user_id: 1
                       property_id: 12
     post:
+    
       summary: create hosting
       tags:
       - Hostings
@@ -466,8 +239,6 @@ paths:
                   type: integer
                 rate:
                   type: integer
-                public:
-                  type: boolean
                 cleaning_fee:
                   type: integer
                 user_id:
@@ -478,7 +249,6 @@ paths:
               - cycle
               - minimum_cycle_amount
               - rate
-              - public
               - cleaning_fee
               - user_id
               - property_id
@@ -510,7 +280,6 @@ paths:
                       cycle: Property name
                       minimum_cycle_amount: Week
                       rate: 200
-                      public: true
                       cleaning_fee: 30
                       user_id: 1
                       property_id: 12
@@ -537,8 +306,6 @@ paths:
                   type: integer
                 rate:
                   type: integer
-                public:
-                  type: boolean
                 cleaning_fee:
                   type: integer
                 user_id:
@@ -549,7 +316,6 @@ paths:
               - cycle
               - minimum_cycle_amount
               - rate
-              - public
               - cleaning_fee
               - user_id
               - property_id
@@ -574,8 +340,6 @@ paths:
                   type: integer
                 rate:
                   type: number
-                public:
-                  type: boolean
                 cleaning_fee:
                   type: number
                 user_id:
@@ -586,7 +350,6 @@ paths:
               - cycle
               - minimum_cycle_amount
               - rate
-              - public
               - cleaning_fee
               - user_id
               - property_id
@@ -1022,74 +785,7 @@ paths:
                       hosting_id: 4   
                       created_at: "2022-11-09T16:41:13.255Z"
                       updated_at: "2022-11-09T16:41:13.255Z"     
-    patch:
-      summary: update reservation
-      tags:
-      - Reservations
-      description: Edit Reservation
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                guests:
-                  type: integer
-                check_in:
-                  type: string
-                check_out:
-                  type: integer
-                price:
-                  type: integer
-                user_id:
-                  type: integer
-                hosting_id:
-                  type: integer
-              required:
-              - guests
-              - check_in
-              - check_out
-              - price
-              - user_id
-              - hosting_id
-    put:
-      summary: update reservation
-      tags:
-      - Reservations
-      description: Edit Reservation
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                guests:
-                  type: integer
-                check_in:
-                  type: string
-                check_out:
-                  type: string
-                price:
-                  type: integer
-                user_id:
-                  type: integer
-                hosting_id:
-                  type: integer
-              required:
-              - guests
-              - check_in
-              - check_out
-              - price
-              - user_id
-              - hosting_id
+    
     delete:
       summary: delete reservation
       tags:

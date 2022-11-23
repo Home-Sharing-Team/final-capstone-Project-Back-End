@@ -44,7 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
     t.integer "cycle", null: false
     t.integer "minimum_cycle_amount", null: false
     t.float "rate", null: false
-    t.boolean "public", default: true, null: false
     t.float "cleaning_fee", default: 0.0, null: false
     t.bigint "user_id", null: false
     t.bigint "property_id", null: false
@@ -56,13 +55,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
 
   create_table "properties", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description", null: false
+    t.text "description", null: false
     t.integer "guest_capacity", null: false
     t.integer "bedrooms", null: false
     t.integer "beds", null: false
     t.integer "baths", null: false
     t.integer "kind", default: 0, null: false
     t.float "size", null: false
+    t.boolean "is_public", default: false, null: false
     t.bigint "user_id", null: false
     t.bigint "address_id", null: false
     t.datetime "created_at", null: false
@@ -96,13 +96,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
     t.date "check_out", null: false
     t.float "price", null: false
     t.bigint "user_id", null: false
-    t.bigint "hosting_id", null: false
     t.bigint "blocked_period_id", null: false
     t.bigint "property_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["blocked_period_id"], name: "index_reservations_on_blocked_period_id"
-    t.index ["hosting_id"], name: "index_reservations_on_hosting_id"
     t.index ["property_id"], name: "index_reservations_on_property_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -113,6 +111,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
     t.string "password_digest", null: false
     t.integer "role", default: 0, null: false
     t.string "avatar"
+    t.text "about"
+    t.string "native_language"
+    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -128,7 +129,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_193900) do
   add_foreign_key "property_categories", "properties"
   add_foreign_key "property_images", "properties"
   add_foreign_key "reservations", "blocked_periods"
-  add_foreign_key "reservations", "hostings"
   add_foreign_key "reservations", "properties"
   add_foreign_key "reservations", "users"
 end

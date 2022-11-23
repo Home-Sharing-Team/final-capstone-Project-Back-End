@@ -1,11 +1,16 @@
 class Api::V1::UsersController < ApplicationController
-  # before_action :authenticate_user, only: [:index]
+  before_action :authenticate_user, only: %i[index create update destroy]
   ALLOWED_DATA = %i[name email password].freeze
 
-  # def index
-  # @users = User.all
-  # render json: { success: true, data: @users }, status: :ok
-  # end
+  def index
+    if @current_user.role == 'admin'
+      @users = User.all
+      users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
+      render json: { success: true, data: users_to_send }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
+  end
 
   def show
     @user = User.find(params[:id])
@@ -18,20 +23,29 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.new(create_user_params)
-    if user.save
-      render json: { success: true, data: user }, status: :created
+    if @current_user.role == 'admin'
+      user = User.new(create_user_params)
+      if user.save
+        users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
+        render json: { success: true, data: users_to_send }, status: :ok
+      else
+        render json: { success: false, error: 'User could not be registered.' }, status: :bad_request
+      end
     else
-      render json: { success: false, error: 'User could not be registered.' }, status: :bad_request
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
     end
   end
 
   def update
     user = User.find(params[:id])
-    if user.update(update_user_params)
-      render json: { success: true, data: user }, status: :ok
+    if @current_user.id == user.id
+      if user.update(update_user_params)
+        render json: { success: true, data: user }, status: :ok
+      else
+        render json: { success: false, errors: 'Cannot update user' }, status: :unprocessable_entity
+      end
     else
-      render json: { success: false, errors: 'Cannot update user' }, status: :unprocessable_entity
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
     end
   end
 
@@ -41,8 +55,13 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    render json: { success: true, data: @user }, status: :ok
+    if @current_user.id == @user.id || @current_user.role == 'admin'
+      @user.destroy
+      users_to_send = JSON.parse(@users.to_json({ except: :password_digest }))
+      render json: { success: true, data: users_to_send }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   end
 
   private

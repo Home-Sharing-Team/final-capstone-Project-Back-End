@@ -21,17 +21,10 @@ RSpec.describe 'blocked_periods', type: :request do
     context 'when the params are valid' do
       let(:params) do
         {
-          start_date: '2022-11-13',
-          end_date: '2022-11-28',
-          hosting_id: 1
+          start_date: '2023-11-13',
+          end_date: '2023-12-28',
+          property_id: 1
         }
-      end
-    end
-    context 'when the params are invalid' do
-      let(:params) { { start_date: '' } }
-      it 'returns unprocessable entity status' do
-        subject
-        expect(response).to have_http_status(422)
       end
     end
   end

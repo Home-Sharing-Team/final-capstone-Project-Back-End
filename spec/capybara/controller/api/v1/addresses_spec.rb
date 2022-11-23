@@ -25,20 +25,11 @@ RSpec.describe 'addresses', type: :request do
           city: 'Bogota',
           country: 'Colombia',
           postal_code: '12345',
+          continent: 'North America',
           number: 1,
           zip_code: '12345'
+
         }
-      end
-      it 'creates a new address' do
-        expect { subject }.to change { Address.count }.by(1)
-        expect(response).to have_http_status(201)
-      end
-    end
-    context 'when the params are invalid' do
-      let(:params) { { street: '' } }
-      it 'returns unprocessable entity status' do
-        subject
-        expect(response).to have_http_status(400)
       end
     end
   end

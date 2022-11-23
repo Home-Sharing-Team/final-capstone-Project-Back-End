@@ -1,15 +1,16 @@
 class Api::V1::PropertiesController < ApplicationController
   # before_action :authorize_request
+  before_action :authenticate_user, only: %i[create destroy update]
   before_action :find_property, except: %i[fetch_user_properties create index]
 
-  ALLOWED_DATA = %i[name description guest_capacity bedrooms beds bathrooms kind size user_id address_id].freeze
+  ALLOWED_DATA = %i[name description guest_capacity bedrooms beds baths kind size].freeze
 
   def index
     if params[:category]
       category = Category.find(params[:category])
-      @properties = category.properties
+      @properties = category.properties.where(is_public: true)
     else
-      @properties = Property.all
+      @properties = Property.where(is_public: true)
     end
 
     properties = JSON.parse(@properties.to_json({ include: %i[images min_cycle_hosting address] }))
@@ -22,17 +23,32 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def fetch_user_properties
-    @properties = Property.where(user: params[:userId])
-    render json: { success: true, data: @properties }, status: :ok
+    @properties = Property.where(user: params[:user_id])
+    properties_to_send = JSON.parse(@properties.to_json({ include: %i[images min_cycle_hosting address] }))
+
+    render json: { success: true, data: properties_to_send }, status: :ok
   rescue ActiveRecord::ActiveRecordError
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def show
-    property = JSON.parse(@property.to_json({ include: [:images, :blocked_periods, :categories, :min_cycle_hosting,
-                                                        :address, :hostings, { user: { except: :password_digest } }] }))
+    property_to_send = build_property(@property)
 
-    render json: { success: true, data: property }, status: :ok
+    render json: { success: true, data: property_to_send }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Property not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+  end
+
+  def show_owner_property
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
+      property_to_send = build_property(@property)
+
+      render json: { success: true, data: property_to_send }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Property not found' }, status: :not_found
   rescue ActiveRecord::ActiveRecordError
@@ -40,22 +56,52 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def create
-    property = Property.new(create_params)
+    address = Address.new(create_address_params)
 
-    if property.save
-      property.categories << array_of_categories
+    if address.save
+      @property = Property.new(create_property_params)
+      @property.user_id = @current_user.id
+      @property.address_id = address.id
 
-      render json: { success: true, data: property }, status: :created
+      if @property.save
+        params[:categories].each do |category_name|
+          category = Category.find_by(name: category_name)
+          PropertyCategory.create(
+            property_id: @property.id,
+            category_id: category.id
+          )
+        end
+
+        latests_category = Category.find_by(name: 'latests')
+        PropertyCategory.create(
+          property_id: @property.id,
+          category_id: latests_category.id
+        )
+
+        property_to_send = build_property(@property)
+        render json: { success: true, data: property_to_send }, status: :created
+      else
+        address.destroy
+        render json: { success: false, error: 'Could not create property.' }, status: :bad_request
+      end
     else
-      render json: { success: false, error: 'Cannot save property' }, status: :bad_request
+      render json: { success: false, error: 'Could not create the property address.' }, status: :bad_request
     end
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'Resource not found' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def update
-    if @property.update(update_params)
-      render json: { success: true, data: @property }, status: :ok
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
+      if @property.update(update_params)
+        render json: { success: true, data: @property }, status: :ok
+      else
+        render json: { success: false, errors: 'Cannot update property' }, status: :unprocessable_entity
+      end
     else
-      render json: { success: false, errors: 'Cannot update property' }, status: :unprocessable_entity
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
     end
   end
 
@@ -64,17 +110,15 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def destroy
-    @property.destroy
-    render json: { success: true, data: @property }, status: :ok
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
+      @property.destroy
+      render json: { success: true, data: @property }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   end
 
   private
-
-  def array_of_categories
-    category_test = Category.find_by_id(1)
-    category_test2 = Category.find_by_id(2)
-    [category_test, category_test2]
-  end
 
   def find_property
     @property = Property.find(params[:id])
@@ -82,7 +126,16 @@ class Api::V1::PropertiesController < ApplicationController
     render json: { success: false, error: 'Property not found' }, status: :not_found
   end
 
-  def create_params
+  def build_property(property)
+    JSON.parse(property.to_json({ include: [:images, :blocked_periods, :categories, :min_cycle_hosting,
+                                            :address, :hostings, { user: { except: :password_digest } }] }))
+  end
+
+  def create_property_params
     params.permit(ALLOWED_DATA)
+  end
+
+  def create_address_params
+    params.require(:address).permit(:street, :number, :city, :country, :zip_code, :continent)
   end
 end

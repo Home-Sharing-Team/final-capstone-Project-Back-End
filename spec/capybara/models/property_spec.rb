@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Property, type: :model do
   before do
     @property = Property.create(name: 'Casa X', description: 'Casa X', guest_capacity: 1, bedrooms: 1, beds: 1,
-                                bathrooms: 1, kind: 'apartment', address_id: 1, size: 20, user_id: 1)
+                                baths: 1, kind: 'apartment', address_id: 1, size: 20, user_id: 1)
   end
 
   it 'is valid with valid attributes' do
@@ -35,8 +35,8 @@ RSpec.describe Property, type: :model do
     expect(@property).to_not be_valid
   end
 
-  it 'is not valid without a bathrooms' do
-    @property.bathrooms = nil
+  it 'is not valid without a baths' do
+    @property.baths = nil
     expect(@property).to_not be_valid
   end
 
@@ -47,6 +47,16 @@ RSpec.describe Property, type: :model do
 
   it 'is not valid without a user_id' do
     @property.user_id = nil
+    expect(@property).to_not be_valid
+  end
+
+  it 'is not valid without a address_id' do
+    @property.address_id = nil
+    expect(@property).to_not be_valid
+  end
+
+  it 'is not valid without a size' do
+    @property.size = nil
     expect(@property).to_not be_valid
   end
 end

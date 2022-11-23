@@ -1,7 +1,7 @@
 class Api::V1::ReservationsController < ApplicationController
-  before_action :authenticate_user, only: %i[create destroy]
+  before_action :authenticate_user, only: %i[create destroy fetch_user_reservations]
   before_action :find_reservation, only: %i[show update destroy]
-  ALLOWED_DATA = %i[check_in check_out user_id guests price hosting_id].freeze
+  ALLOWED_DATA = %i[check_in check_out user_id guests price property_id].freeze
 
   def index
     @reservations = Reservation.all
@@ -11,12 +11,16 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def fetch_user_reservations
-    @reservations = Reservation.where(user: params[:userId])
+    if @current_user.id == params[:user_id].to_i
+      @reservations = Reservation.where(user: params[:user_id])
 
-    reservations = JSON.parse(@reservations.to_json({ include: [:hosting, { user: { except: :password_digest } },
-                                                                { property: { include: [:images] } }] }))
+      reservations = JSON.parse(@reservations.to_json({ include: [:hosting, { user: { except: :password_digest } },
+                                                                  { property: { include: [:images] } }] }))
 
-    render json: { success: true, data: reservations }, status: :ok
+      render json: { success: true, data: reservations }, status: :ok
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   rescue ActiveRecord::ActiveRecordError
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
@@ -30,23 +34,22 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def create
-    hosting = Hosting.find(params[:hosting_id])
-    @blocked_period = BlockedPeriod.new(property_id: hosting.property_id, start_date: params[:check_in],
+    @blocked_period = BlockedPeriod.new(property_id: params[:property_id], start_date: params[:check_in],
                                         end_date: params[:check_out])
     if @blocked_period.save
       @reservation = Reservation.new(create_params)
-      @reservation.property_id = hosting.property_id
       @reservation.blocked_period_id = @blocked_period.id
-
+      p @reservation
       if @reservation.save
         reservation = build_reservation(@reservation)
         render json: { success: true, data: reservation }, status: :created
       else
         @blocked_period.destroy
-        render json: { success: false, error: @reservation.errors }, status: :unprocessable_entity
+        render json: { success: false, error: @reservation.errors.to_a.flatten.join('. ') },
+               status: :unprocessable_entity
       end
     else
-      render json: { success: false, error: @blocked_period.errors }, status: :bad_request
+      render json: { success: false, error: @blocked_period.errors.to_a.flatten.join('. ') }, status: :bad_request
     end
   end
 
