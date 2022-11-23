@@ -176,7 +176,7 @@ GitHub: https://github.com/DarioAlessioR
 
 Slack: https://microverse-students.slack.com/team/U039GCFRK9B
 
-- This is My **LinkedIn**: [![@dario-alessio-3a3b7911b](https://img.shields.io/linkedin/followers/omarramoun?label=Dario&style=social)](https://www.linkedin.com/in/dario-alessio-3a3b7911b)
+- This is My **LinkedIn**: [![@dario-alessio](https://img.shields.io/linkedin/followers/omarramoun?label=Dario&style=social)](https://www.linkedin.com/in/dario-alessio-3a3b7911b)
 
 
 LinkedIn: https://www.linkedin.com/in/dario-alessio-3a3b7911b
