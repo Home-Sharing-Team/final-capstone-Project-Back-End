@@ -162,9 +162,28 @@ Give a :star: if you like this project! (click here)
 
 ## Authors:
 
+👤 **Ulises Largaespada**
+
+- GitHub: [@ulisesedu7](https://github.com/ulisesedu7)
+
+- Twitter: [@LongswordMusic](https://twitter.com/LongswordMusic)
+
+- LinkedIn: [Ulises Largaespada](https://www.linkedin.com/in/ulises-largaespada-45570b1a4/)
+
+
+👤 **Gabriel Santo**
+
+- GitHub: [@gvgesanto2](https://github.com/gvgesanto2)
+
+- Twitter: [@GabrielSanto997](https://twitter.com/GabrielSanto997)
+
+- LinkedIn: [Gabriel Santo](https://linkedin.com/in/gabriel-santo-5882a71b2/)
+
+
 👤 **David Verde Alvarez**
 
 - This is My **GitHub**: [![@David-Verde](https://img.shields.io/github/followers/omarramoun?label=David&style=social)](https://github.com/David-Verde)
+
 - This is My **Twitter**: [![@Unyielding1](https://img.shields.io/twitter/follow/omarramoun?label=David16&style=social)](https://twitter.com/UnyieldingOne)
 
 
