@@ -138,18 +138,18 @@ To have this app on your pc, you need to:
 
   - Clone with SSH:
   ```
-git@github.com:David-Verde/final-capstone-Project-Back-End.git
+git@github.com:Home-Sharing-Team/final-capstone-Project-Back-End.git
   ```
   - Clone with HTTPS
   ```
-https://github.com/David-Verde/final-capstone-Project-Back-End.git
+https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End.git
   ```
 
 * In the project directory, you can run:
 
   - `$ bundle install` - installs all the dependencies required by the project
 
-  Run Rails s command to run Ruby on Rails console
+  Run Rails s command to run Ruby on Rails server and launch your browser to see the project
 
 ## Testing:
 
