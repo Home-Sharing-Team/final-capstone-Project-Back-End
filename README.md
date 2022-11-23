@@ -44,29 +44,29 @@ The properties owners can customize the terms of the rental for each property, w
 
 The basic project requirements are defined by Microverse and can be seen in this <a href="https://github.com/microverseinc/curriculum-final-capstone/blob/main/projects/business_requirements.md#project-requirements">link</a>. 
 
-curricullum and can be according to the following User stories:
+User stories:  In addition to the basic project requirements, a set of specific requirements was developed from a list of user stories, as shown below:
 
 A) When I go to the home page:
-1. I can see a selection of the latest properties to rent on the home page, with 1 photo, property title, country, city,  and the rate per cycle. Also, inside a parenthesis, must be the minimum_cycle_amount.
+1. I can see a selection of the latest properties to rent on the home page, with 1 photo, property title, country, city,  and the rate.
 2. If I click on a photo or property title, I can see:
 - The property title,
 - The whole address,
 - The category or categories assigned by the owner (beach, family, honeymoon, mountain, etc.),
-- A big photo and 2 photo miniatures that can show bigger in a popup if clicked,
+- A big photo and several photo miniatures that can show bigger in a popup if clicked,
 - A description,
 - The guest_capacity, the number of bedrooms, beds, baths,
-- The type (house or apartment),
+- The kind of property (house, apartment, villa, etc.),
 - The size (must indicate what measurement unit is the size, mts2 or ft2, etc),
-- The rate per cycle,
-- The minimum_cycle_amount,
-- The cleaning_fee,
+- The rate per night, week, month,
+- The minimum period of time that the property rents for,
+- The cleaning fee,
 - A button or link to go to the reservation page for this property,
 - A button or link to go back to the home page 
 
 3. I can also see a select button to select a country to show properties for that country only.
-4. After selecting a country, I can see a title indicating the selected country, and the list of properties for that country with 1 photo, property title, country, city,  and the rate per cycle.  Also, inside a parenthesis, must be the minimum_cycle_amount.
+4. After selecting a country, I can see a title indicating the selected country, and the list of properties for that country with 1 photo, property title, country, city,  and the rate per night, week, etc.  Also, inside a parenthesis, must be the minimum time for rent.
 5. After clicking on one photo or property title, I can see all I can see in A.2. But the button or link to go back must take me to the country list page.
-6. When I click the reservation button, I can see the fields to enter check_in and check-out dates, and also a field to enter the number of guests that will stay in the property (the entered number of guests must be greater than 0, and smaller or equal to the guest capacity of the property). Optionally, I can see a calendar that shows 12 months in advance, with indicated available dates highlighted.
+6. When I click the reservation button, I can see the fields to enter check_in and check-out dates (or a calendar to select dates), and also a field to enter the number of guests that will stay in the property (the entered number of guests must be greater than 0, and smaller or equal to the guest capacity of the property). 
 7. I can see a “Check dates” button to check if the requested reservation period is available.
 8. After clicking in this button, I can see the messages: “The property is available for your requested dates” or “Sorry, the property is not available for your requested dates. Please try a different time period”.
 9. If there isn’t availability, I can enter different dates to start a new check with the Check dates button.
@@ -81,7 +81,8 @@ B) In the navbar I can see a button or link to “Become a Host”. If I click t
 - The page for signing up (with name, email, and password) or logging in (with email and password).
 - After successfully sing up or logging in, I can see a form to upload all information and photos for a new property (see A.2).
 - If the user was already logged in, the “Become a Host” button takes the user directly to the form, without requesting sign up or log in.
-- After entering the new property info, the page shows the homepage and a message with: “Thank you for uploading your property”. 
+- After entering the new property info, the page shows the homepage and a message with: “Thank you for uploading your property”.
+- There must be an option for the property owner to block periods of time to avoid user to make reservations on those periods.
 
 C) In the navbar I can see also buttons or links to sign up, log in, and log out.
 
@@ -90,18 +91,15 @@ D) In the navbar I can see a button to show the list of all uploaded properties 
 - A button for updating general information,
 - A button for deleting the property from the list,
 - And a "Block periods" button for creating blocked periods.
-- If the "Block periods" button is clicked, the page shows a form with tow input fields to enter start and end dates for the block period, and a button to save the new blocked period. After saving the blocked period, the page shows again the list of uploaded properties for this user, which contains a button to navigate to homepage.
+- If the "Block periods" button is clicked, the page shows a form with tow input fields (or a calendar) to enter start and end dates for the block period, and a button to save the new blocked period. After saving the blocked period, the page shows again the list of uploaded properties for this user, which contains a button to navigate to homepage.
 
-E) In the navbar I can see a button to show the list of all the reservations created by the logged-in user, with the name of the property, reservation Id, and a button to update and a button to delete it.
+E) In the navbar I can see a button to show the list of all the reservations created by the logged-in user, with the name of the property, reservation Id, and a button to delete it.
 
 
 ## Entity Relation Diagram:
 
 <img src="/images/ERD.jpeg" alt="Logo" width="800" height="500">
   </a>
-
-
-
 
 ### Built With
 This project was built using these technologies.
