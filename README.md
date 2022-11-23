@@ -36,9 +36,17 @@
 ## About The Project
 This is the final capstone project for the Full Stack Developer Program at Microverse.
 
-The Home Sharing App is a full responsive app that provides the service for conecting home owners wanting to rent their properties and potential clients.
+The Home Sharing App is a full responsive app that provides the service for conecting home owners wanting to rent their properties and potential clients, enablig the creation of reservations of periods of time on selected properties.
 
-The properties owners can customize the terms of the rental for each property, which lets the app to be used for short term rental (like short vacations at the beach) or for long term rental, enablig the app to point to different market segments.
+The properties owners can customize the terms of the rental for each property, which lets the app to be used for short term rental (like short vacations at the beach) or for long term, enablig the app to point to different market segments.
+
+The app was built with a Ruby on Rails backend and a React/Redux frontend, located on separated repositories.
+
+This is the backend repository. Below you will find the link to visit the frontend repo.
+
+## Frontend repository:
+
+To visit the frontend repositori, please click on this <a href="https://github.com/Home-Sharing-Team/microverse-final-capstone-web">link</a>.
 
 ## Project requirements:
 
@@ -101,16 +109,27 @@ E) In the navbar I can see a button to show the list of all the reservations cre
 <img src="/images/ERD.jpeg" alt="Logo" width="800" height="500">
   </a>
 
-### Built With
+## Built With
 This project was built using these technologies.
 * Ruby
-* Visual Studio
+* Ruby on Rails
+* React
+* Redux
+* HTML
+* CSS
+* JavaScript
+* PostgreSql, pgAdmin 4
+* JSON Web Token (JWT)
+* API integration
+* Adobe Ilustrator
+* Adobe After Effect
 * Rubocop
-* Rails
-* Css
-* Capibara
-* Devise
-* CanCanCan
+* Capybara
+* Rspec
+* OpenApi(Swagger)
+* GitHub, Gitflow
+* Visual Studio
+
 
 <!-- INSTALLATION -->
 ## Usage
