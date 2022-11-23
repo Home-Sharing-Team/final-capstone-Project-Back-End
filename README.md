@@ -2,21 +2,19 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/David-Verde/final-capstone-Project-Back-End">
+  <a href="https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End">
  <img src="/images/Home-Sharing-Project.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Ruby on Rails --> [final-capstone-Project-Back-End-App]</h3>
+  <h3 align="center"><strong>Home Sharing App</strong></h3>
 
   <p align="center">
-    This project is part of the Microverse curriculum Capstone Project in Ruby on rails module!
-    <br />
-    <a href="https://github.com/David-Verde/final-capstone-Project-Back-End"><strong>Explore the docs »</strong></a>
+    This is the final capstone project for the Full Stack Developer Program at Microverse
     <br />
     <br />
-    <a href="https://github.com/David-Verde/final-capstone-Project-Back-End/issues">Report Bug</a>
+    <a href="https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End/issues">Report Bug</a>
     ·
-    <a href="https://github.com/David-Verde/final-capstone-Project-Back-End/issues">Request Feature</a>
+    <a href="https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End/issues">Request Feature</a>
   </p>
 </p>
 
@@ -24,23 +22,19 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-  * [Built With](#built-with)
-  * [Usage](#usage)
-  * [Automated Test](#automated-test)
+* [Project requirements](#project-requirements)
+* [Entity Relation Diagram](#entity-relation-diagram)
+* [Built With](#built-with)
+* [Usage](#usage)
+* [Automated Test](#automated-test)
+* [Kanban Board](#kanban-board)
 * [Contributors](#contributors)
 * [Acknowledgements](#acknowledgements)
 * [License](#license)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Final Capstone Project Back-End production
-
-
-
-###
- <a href="https://github.com/David-Verde/final-capstone-Project-Back-End">
-    
-  </a>
+Final Capstone Project Back-End production.
 
 
 ## Project requirements:
