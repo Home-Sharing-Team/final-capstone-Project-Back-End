@@ -154,11 +154,17 @@ https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End.git
 ## Testing:
 
 Tu run the test in your terminal, please type: rspec spec/capybara
-  
+
+
+## Kanban Board:
+
+Link to the project Kanban board: <a href="https://github.com/orgs/Home-Sharing-Team/projects/2">Click here</a>.
+
+Link to the screenshot of the initial state of the Kanban board: <a href="https://github.com/orgs/Home-Sharing-Team/projects/2">Click here</a>.
 
 ## Show your support:
 
-Give a :star: if you like this project! (click here)
+Give a :star: if you like this project!
 
 ## Authors:
 
