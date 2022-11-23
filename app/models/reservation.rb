@@ -1,3 +1,7 @@
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Layout/LineLength
+
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :property
@@ -120,3 +124,6 @@ class Reservation < ApplicationRecord
     errors.add(:check_in, '- check in date must be after today')
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Layout/LineLength
