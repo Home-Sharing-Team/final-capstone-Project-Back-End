@@ -22,6 +22,7 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
+* [Frontend repository](#frontend-repository)
 * [Project requirements](#project-requirements)
 * [Entity Relation Diagram](#entity-relation-diagram)
 * [Built With](#built-with)
@@ -109,7 +110,7 @@ E) In the navbar I can see a button to show the list of all the reservations cre
 <img src="/images/ERD.jpeg" alt="Logo" width="800" height="500">
   </a>
 
-## Built With
+## Built With:
 This project was built using these technologies.
 * Ruby
 * Ruby on Rails
@@ -132,7 +133,7 @@ This project was built using these technologies.
 
 
 <!-- INSTALLATION -->
-## Usage
+## Usage:
 
 To have this app on your pc, you need to:
 
@@ -156,17 +157,14 @@ https://github.com/David-Verde/final-capstone-Project-Back-End.git
     rspec spec/capybara
   
 
-
-
-## Show your support
+## Show your support:
 
 Give a :star: if you like this project!
 
+## Authors:
 
-
-
-Authors
 👤 **David Verde Alvarez**
+
 - This is My **GitHub**: [![@David-Verde](https://img.shields.io/github/followers/omarramoun?label=David&style=social)](https://github.com/David-Verde)
 - This is My **Twitter**: [![@Unyielding1](https://img.shields.io/twitter/follow/omarramoun?label=David16&style=social)](https://twitter.com/UnyieldingOne)
 )
@@ -174,10 +172,9 @@ Authors
 👤 Dario Alessio
 
 GitHub: https://github.com/DarioAlessioR
-
 Slack: https://microverse-students.slack.com/team/U039GCFRK9B
-
 LinkedIn: https://www.linkedin.com/in/dario-alessio-3a3b7911b
 
+## License:
 This project is [MIT](https://github.com/David-Verde/final-capstone-Project-Back-End/blob/develop/LICENSE) licensed.
 
