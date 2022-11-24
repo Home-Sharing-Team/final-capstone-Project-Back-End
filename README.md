@@ -153,11 +153,13 @@ https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End.git
 
   - `rails db:migrate` - run migrations
 
-  - `rails db:seed` - insert the seed data in the new database
+  - `rake db:seed` - insert the seed data in the new database
 
   - `rails s` - to run the Ruby on Rails server and launch your browser to see the project
 
 ## Testing:
+
+Before running the test command, please make sure you have run `rake db:seed`
 
 To run the test in your terminal, please type: `rspec spec/capybara`
 
