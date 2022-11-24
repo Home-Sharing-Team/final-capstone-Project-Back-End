@@ -2,9 +2,12 @@ class Property < ApplicationRecord
   has_many :images, class_name: 'PropertyImage', dependent: :destroy
   has_many :property_categories, dependent: :destroy
   has_many :categories, through: :property_categories
+
+  has_many :reservations, dependent: :destroy
   has_many :blocked_periods, dependent: :destroy
-  has_many :hostings, dependent: :destroy
   has_one :min_cycle_hosting, class_name: 'Hosting', dependent: :destroy
+  has_many :hostings, dependent: :destroy
+
   belongs_to :address
   belongs_to :user
 
@@ -31,6 +34,11 @@ class Property < ApplicationRecord
                                   hostings_hash['month'].id
                                 end
 
+    Hosting.find(min_cycle_hosting_id)
+
+    save
+  rescue ActiveRecord::RecordNotFound
+    self.min_cycle_hosting_id = nil
     save
   end
 

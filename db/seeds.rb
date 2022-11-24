@@ -335,7 +335,7 @@ PropertyImage.create(property_id: 7, source: 'https://i.ibb.co/pnNJcQ7/682d90e6-
 PropertyImage.create(property_id: 7, source: 'https://i.ibb.co/GczTvF9/3cb269ae-ded0-4d24-ad4e-269247444616.webp')
 PropertyImage.create(property_id: 7, source: 'https://i.ibb.co/gyPf6Zy/3a9e4bd8-5281-49c0-a2f1-dbfa598cb2ae.webp')
 
-PropertyCategory.create(property_id: 1, category_id: 1)
+PropertyCategory.create(property_id: 7, category_id: 1)
 PropertyCategory.create(property_id: 7, category_id: 16)
 PropertyCategory.create(property_id: 7, category_id: 9)
 
