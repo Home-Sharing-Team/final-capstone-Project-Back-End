@@ -147,13 +147,19 @@ https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End.git
 
 * In the project directory, you can run:
 
-  - `$ bundle install` - installs all the dependencies required by the project
+  - `bundle install` - installs all the dependencies required by the project
 
-  Run 'Rails s' command to run the Ruby on Rails server and launch your browser to see the project
+  - `rails db:create` - create a database in your local machine
+
+  - `rails db:migrate` - run migrations
+
+  - `rails db:seed` - insert the seed data in the new database
+
+  - `rails s` - to run the Ruby on Rails server and launch your browser to see the project
 
 ## Testing:
 
-Tu run the test in your terminal, please type: `rspec spec/capybara`
+To run the test in your terminal, please type: `rspec spec/capybara`
 
 
 ## Kanban Board:
@@ -214,4 +220,4 @@ Give a :star: if you like this project!
 - Our supportive families 😊
 
 ## License:
-This project is [MIT](https://github.com/David-Verde/final-capstone-Project-Back-End/blob/develop/LICENSE) licensed.
+This project is [MIT](./LICENSE) licensed.
