@@ -1,7 +1,7 @@
 class Api::V1::ReservationsController < ApplicationController
   before_action :authenticate_user, only: %i[create destroy fetch_user_reservations]
   before_action :find_reservation, only: %i[show update destroy]
-  ALLOWED_DATA = %i[check_in check_out user_id guests price property_id].freeze
+  ALLOWED_DATA = %i[check_in check_out guests property_id].freeze
 
   def index
     @reservations = Reservation.all
@@ -38,7 +38,9 @@ class Api::V1::ReservationsController < ApplicationController
                                         end_date: params[:check_out])
     if @blocked_period.save
       @reservation = Reservation.new(create_params)
+      @reservation.user_id = @current_user.id
       @reservation.blocked_period_id = @blocked_period.id
+
       if @reservation.save
         reservation = build_reservation(@reservation)
         render json: { success: true, data: reservation }, status: :created
@@ -50,6 +52,10 @@ class Api::V1::ReservationsController < ApplicationController
     else
       render json: { success: false, error: @blocked_period.errors.to_a.flatten.join('. ') }, status: :bad_request
     end
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: 'No property found with this ID.' }, status: :not_found
+  rescue ActiveRecord::ActiveRecordError
+    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
   def update
@@ -89,7 +95,7 @@ class Api::V1::ReservationsController < ApplicationController
   end
 
   def build_reservation(reservation)
-    JSON.parse(reservation.to_json({ include: [:hosting, { user: { except: :password_digest } },
+    JSON.parse(reservation.to_json({ include: [{ user: { except: :password_digest } },
                                                { property: { include: [:images] } }] }))
   end
 end

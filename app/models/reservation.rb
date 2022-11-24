@@ -1,7 +1,3 @@
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Layout/LineLength
-
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :property
@@ -38,9 +34,10 @@ class Reservation < ApplicationRecord
     }
     selected_hosting = hostings_hash[min_cycle]
 
-    if cycle_durations[min_cycle] < cycle_durations['week'] && num_nights >= cycle_durations['week'] && num_nights < cycle_durations['month'] && hostings_hash['week']
+    if cycle_durations[min_cycle] < cycle_durations['week'] && num_nights >= cycle_durations['week'] && hostings_hash['week']
       selected_hosting = hostings_hash['week']
-    elsif cycle_durations[min_cycle] < cycle_durations['month'] && num_nights >= cycle_durations['month'] && hostings_hash['month']
+    end
+    if cycle_durations[min_cycle] < cycle_durations['month'] && num_nights >= cycle_durations['month'] && hostings_hash['month']
       selected_hosting = hostings_hash['month']
     end
 
@@ -124,6 +121,3 @@ class Reservation < ApplicationRecord
     errors.add(:check_in, '- check in date must be after today')
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Layout/LineLength

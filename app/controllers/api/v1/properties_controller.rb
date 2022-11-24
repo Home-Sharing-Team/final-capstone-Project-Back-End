@@ -40,20 +40,6 @@ class Api::V1::PropertiesController < ApplicationController
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
   end
 
-  def show_owner_property
-    if @current_user.id == @property.user_id || @current_user.role == 'admin'
-      property_to_send = build_property(@property)
-
-      render json: { success: true, data: property_to_send }, status: :ok
-    else
-      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
-    end
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Property not found' }, status: :not_found
-  rescue ActiveRecord::ActiveRecordError
-    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-  end
-
   def create
     address = Address.new(create_address_params)
 
