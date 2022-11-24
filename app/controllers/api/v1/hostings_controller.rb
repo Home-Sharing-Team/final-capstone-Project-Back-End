@@ -1,6 +1,5 @@
 class Api::V1::HostingsController < ApplicationController
   before_action :authenticate_user, only: %i[create update destroy]
-  # before_action :check_ownership, only: %i[create update destroy]
   before_action :find_hosting, only: %i[show update destroy]
   ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id property_id].freeze
 

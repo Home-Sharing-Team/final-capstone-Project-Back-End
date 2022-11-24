@@ -1,5 +1,4 @@
 class Api::V1::PropertiesController < ApplicationController
-  # before_action :authorize_request
   before_action :authenticate_user, only: %i[create destroy update]
   before_action :find_property, except: %i[fetch_user_properties create index]
 

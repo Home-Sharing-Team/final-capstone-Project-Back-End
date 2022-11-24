@@ -1,5 +1,4 @@
 class Api::V1::BlockedPeriodsController < ApplicationController
-  # before_action :authenticate_user
   ALLOWED_DATA = %i[start_date end_date property_id].freeze
 
   def index

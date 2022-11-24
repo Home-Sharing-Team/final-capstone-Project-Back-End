@@ -579,20 +579,3 @@ BlockedPeriod.create(
   end_date: '2023, 01, 25',
   property_id: 9
 )
-
-# Address.create(street: 'Calle 1', city: 'Bogota', country: 'Colombia', zip_code: '111111', number: 1)
-# Address.create(street: 'Calle 2', city: 'Taiwan', country: 'China', zip_code: '111111', number: 2)
-
-# Property.create(name: 'Casa 1', description: 'Casa 1', guest_capacity: 1, bedrooms: 1, beds: 1, bathrooms: 1, kind: 'apartment', address_id: 1, size: 1, user_id: 1)
-# Property.create(name: 'Casa 2', description: 'Casa 2', guest_capacity: 2, bedrooms: 2, beds: 2, bathrooms: 2, kind: 'house', address_id: 2, size: 2, user_id: 2)
-# Property.create(name: 'Casa 3', description: 'Casa 3', guest_capacity: 3, bedrooms: 3, beds: 3, bathrooms: 3, kind: 'apartment', address_id: 1, size: 3, user_id: 2)
-# Hosting.create(cycle: 0, minimum_cycle_amount: 1, rate: 1, cleaning_fee: 1, user_id: 1, property_id: 1)
-# Hosting.create(cycle: 1, minimum_cycle_amount: 1, rate: 1, cleaning_fee: 1, user_id: 1, property_id: 1)
-# Hosting.create(cycle: 2, minimum_cycle_amount: 2, rate: 12, cleaning_fee: 1, user_id: 2, property_id: 2)
-# BlockedPeriod.create(start_date: '2023-01-01', end_date: '20213-02-02', property_id: 1)
-# Reservation.create(check_in: '2023-03-01', check_out: '2023-06-02', guests: 1, user_id: 1, hosting_id: 2, price: 100)
-# PropertyImage.create(property_id: 1, source: 'https://images.unsplash.com/photo-1610078888888-1b1b1b1b1b1b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80')
-
-# PropertyCategory.create(property_id: 1, category_id: 1)
-# PropertyCategory.create(property_id: 2, category_id: 1)
-# PropertyCategory.create(property_id: 1, category_id: 2)

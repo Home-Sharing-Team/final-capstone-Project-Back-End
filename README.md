@@ -147,13 +147,21 @@ https://github.com/Home-Sharing-Team/final-capstone-Project-Back-End.git
 
 * In the project directory, you can run:
 
-  - `$ bundle install` - installs all the dependencies required by the project
+  - `bundle install` - installs all the dependencies required by the project
 
-  Run 'Rails s' command to run the Ruby on Rails server and launch your browser to see the project
+  - `rails db:create` - create a database in your local machine
+
+  - `rails db:migrate` - run migrations
+
+  - `rake db:seed` - insert the seed data in the new database
+
+  - `rails s` - to run the Ruby on Rails server and launch your browser to see the project
 
 ## Testing:
 
-Tu run the test in your terminal, please type: `rspec spec/capybara`
+Before running the test command, please make sure you have run `rake db:seed`
+
+To run the test in your terminal, please type: `rspec spec/capybara`
 
 
 ## Kanban Board:
@@ -162,6 +170,7 @@ Link to the project Kanban board: <a href="https://github.com/orgs/Home-Sharing-
 
 Link to the screenshot of the initial state of the Kanban board: <a href="https://user-images.githubusercontent.com/64566209/199840132-dde39cfe-be8a-4172-9bf5-f5d0485ce13f.png">Click here</a>.
 
+The final number of team members for this project is: 4
 
 
 ## Authors:
@@ -213,4 +222,4 @@ Give a :star: if you like this project!
 - Our supportive families 😊
 
 ## License:
-This project is [MIT](https://github.com/David-Verde/final-capstone-Project-Back-End/blob/develop/LICENSE) licensed.
+This project is [MIT](./LICENSE) licensed.

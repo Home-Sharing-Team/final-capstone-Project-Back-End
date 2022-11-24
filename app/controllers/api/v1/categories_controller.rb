@@ -1,5 +1,4 @@
 class Api::V1::CategoriesController < ApplicationController
-  # before_action :authenticate_user
   before_action :find_category, only: %i[show update destroy]
   ALLOWED_DATA = %i[name].freeze
 
@@ -21,7 +20,6 @@ class Api::V1::CategoriesController < ApplicationController
   def create
     category = Category.new(create_params)
     if category.save
-      # category.properties << array_of_properties
       render json: { success: true, data: category }, status: :created
     else
       render json: { success: false, error: 'Cannot save category' }, status: :bad_request
@@ -46,12 +44,6 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   private
-
-  # def array_of_properties
-  # property_test = Property.find_by_id(3)
-  # properties = [property_test]
-
-  # end
 
   def find_category
     @category = Category.find(params[:id])
