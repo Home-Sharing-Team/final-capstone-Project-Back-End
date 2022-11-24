@@ -25,6 +25,8 @@
 * [Project requirements](#project-requirements)
 * [Entity Relation Diagram](#entity-relation-diagram)
 * [Built With](#built-with)
+* [Live Demo](#live-demo)
+* [API Documentation](#api-documentation)
 * [Usage](#usage)
 * [Testing](#testing)
 * [Kanban Board](#kanban-board)
@@ -130,6 +132,16 @@ This project was built using these technologies:
 * OpenApi(Swagger)
 * GitHub, Gitflow
 * Visual Studio
+
+
+## Live Demo:
+
+To visit the live API site, please <a href="https://home-sharing-api.onrender.com/">Click here</a>.
+
+
+## API Documentation:
+
+To see the API documentation, please <a href="https://home-sharing-api.onrender.com/api-docs/index.html">Click here</a>.
 
 
 ## Usage:
