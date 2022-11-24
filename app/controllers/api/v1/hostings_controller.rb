@@ -1,7 +1,7 @@
 class Api::V1::HostingsController < ApplicationController
   before_action :authenticate_user, only: %i[create update destroy]
   before_action :find_hosting, only: %i[show update destroy]
-  ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee public user_id property_id].freeze
+  ALLOWED_DATA = %i[cycle minimum_cycle_amount rate cleaning_fee property_id].freeze
 
   def index
     @hostings = Hosting.all
@@ -20,8 +20,11 @@ class Api::V1::HostingsController < ApplicationController
 
   def create
     @property = Property.find(params[:property_id])
+
     if @current_user.id == @property.user_id || @current_user.role == 'admin'
       @hosting = Hosting.new(create_params)
+      @hosting.user_id = @current_user.id
+
       if @hosting.save
         render json: { success: true, data: @hosting }, status: :created
       else

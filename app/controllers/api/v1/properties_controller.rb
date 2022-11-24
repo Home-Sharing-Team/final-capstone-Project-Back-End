@@ -1,5 +1,5 @@
 class Api::V1::PropertiesController < ApplicationController
-  before_action :authenticate_user, only: %i[create destroy update]
+  before_action :authenticate_user, only: %i[create destroy update update_visibility]
   before_action :find_property, except: %i[fetch_user_properties create index]
 
   ALLOWED_DATA = %i[name description guest_capacity bedrooms beds baths kind size].freeze
@@ -34,20 +34,6 @@ class Api::V1::PropertiesController < ApplicationController
     property_to_send = build_property(@property)
 
     render json: { success: true, data: property_to_send }, status: :ok
-  rescue ActiveRecord::RecordNotFound
-    render json: { success: false, error: 'Property not found' }, status: :not_found
-  rescue ActiveRecord::ActiveRecordError
-    render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
-  end
-
-  def show_owner_property
-    if @current_user.id == @property.user_id || @current_user.role == 'admin'
-      property_to_send = build_property(@property)
-
-      render json: { success: true, data: property_to_send }, status: :ok
-    else
-      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
-    end
   rescue ActiveRecord::RecordNotFound
     render json: { success: false, error: 'Property not found' }, status: :not_found
   rescue ActiveRecord::ActiveRecordError
@@ -90,6 +76,27 @@ class Api::V1::PropertiesController < ApplicationController
     render json: { success: false, error: 'Resource not found' }, status: :not_found
   rescue ActiveRecord::ActiveRecordError
     render json: { success: false, error: 'Internal server error.' }, status: :internal_server_error
+  end
+
+  def update_visibility
+    if @current_user.id == @property.user_id || @current_user.role == 'admin'
+      is_public = params[:is_public]
+
+      if is_public == true && @property.hostings.empty?
+        return render json: { success: false, errors: 'You need to have at least one available hosting to publish your property.' },
+                      status: :bad_request
+      end
+
+      if @property.update({ is_public: })
+        property_to_send = build_property(@property)
+
+        render json: { success: true, data: property_to_send }, status: :ok
+      else
+        render json: { success: false, errors: 'Property could not be updated.' }, status: :unprocessable_entity
+      end
+    else
+      render json: { success: false, error: 'You are not authorized to complete this action.' }, status: :forbidden
+    end
   end
 
   def update
