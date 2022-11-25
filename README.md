@@ -141,7 +141,7 @@ To visit the live API site, please <a href="https://home-sharing-api.onrender.co
 
 ## API Documentation:
 
-To see the API documentation, please <a href="https://dry-beyond-67351.herokuapp.com/api-docs/index.html"
+To see the API documentation, please <a href="https://dry-beyond-67351.herokuapp.com/api-docs/index.html
 ">Click here</a>.
 
 Notice: to be able to interact with the documentation sections you need to create a user with name, email and password. After it you will need to log-in and pick the sent token and enter it in the Authorize section (bearerAuth  (http, Bearer)).
