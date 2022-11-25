@@ -1,0 +1,950 @@
+---
+openapi: 3.0.1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # optional, for documentation purposes only
+
+security:
+  - bearerAuth: []
+info:
+  title: API V1
+  version: v1
+paths:
+
+  "/api/v1/auth/register":
+    post:
+      summary: register
+      tags:
+      - Registration
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - email
+              - password
+  "/api/v1/auth/sign_in":
+    post:
+      summary: sign in
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/api/v1/auth/sign_out":
+    delete:
+      summary: sign out
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/api/v1/blocked_periods":
+    get:
+      summary: list blocked_periods
+      tags:
+      - Blocked_periods
+      description: Retrieves all Blocked_periods
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - start_date: "2022-12-10"
+                      end_date: "2022-12-30"
+                      property_id: 2
+    post:
+      summary: create blocked_period
+      tags:
+      - Blocked_periods
+      description: Create a new Blocked_period
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                end_date:
+                  type: string
+                property_id:
+                  type: integer
+              required:
+              - start_date
+              - end_date
+              - property_id
+  "/api/v1/blocked_periods/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show blocked_period
+      tags:
+      - Blocked_periods
+      description: Show Blocked_periods
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - Id: 3
+                      start_date: "2022-12-10"
+                      end_date: "2022-12-30"
+                      property_id: 2
+                      created_at: "2022-11-09T17:04:50.717Z"
+                      updated_at: "2022-11-09T17:04:50.717Z"
+    
+    delete:
+      summary: delete blocked_period
+      tags:
+      - Blocked_periods
+      description: Delete Blocked_period
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                succesful_logout:
+                  value:
+                    code: 202
+                    data:
+                      message: Blocked_period delete successfully   
+  "/api/v1/categories":
+    get:
+      summary: list categories
+      tags:
+      - Categories
+      description: Retrieves all Categories
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - name: Category name
+    
+    
+    
+          
+
+  "/api/v1/hostings":
+    get:
+      summary: list hostings
+      tags:
+      - Hostings
+      description: Retrieves all Hostings
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - cycle: Property name
+                      minimum_cycle_amount: Week
+                      rate: 200
+                      cleaning_fee: 30
+                      user_id: 1
+                      property_id: 12
+    post:
+    
+      summary: create hosting
+      tags:
+      - Hostings
+      description: Create a Hosting
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cycle:
+                  type: integer
+                minimum_cycle_amount:
+                  type: integer
+                rate:
+                  type: integer
+                cleaning_fee:
+                  type: integer
+                user_id:
+                  type: integer
+                property_id:
+                  type: integer
+              required:
+              - cycle
+              - minimum_cycle_amount
+              - rate
+              - cleaning_fee
+              - user_id
+              - property_id
+  "/api/v1/hostings/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show hosting
+      tags:
+      - Hostings
+      description: Show all Hostings
+      responses:
+        '200':
+          description: successful
+           
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - Id: 2
+                      cycle: Property name
+                      minimum_cycle_amount: Week
+                      rate: 200
+                      cleaning_fee: 30
+                      user_id: 1
+                      property_id: 12
+                      created_at: "2022-11-09T22:50:27.978Z"
+                      updated_at: "2022-11-09T22:50:27.978Z"
+    patch:
+      summary: update hosting
+      tags:
+      - Hostings
+      description: Edit Hosting
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cycle:
+                  type: integer
+                minimum_cycle_amount:
+                  type: integer
+                rate:
+                  type: integer
+                cleaning_fee:
+                  type: integer
+                user_id:
+                  type: integer
+                property_id:
+                  type: integer
+              required:
+              - cycle
+              - minimum_cycle_amount
+              - rate
+              - cleaning_fee
+              - user_id
+              - property_id
+    put:
+      summary: update hosting
+      tags:
+      - Hostings
+      description: Edit Hosting
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cycle:
+                  type: integer
+                minimum_cycle_amount:
+                  type: integer
+                rate:
+                  type: number
+                cleaning_fee:
+                  type: number
+                user_id:
+                  type: number
+                property_id:
+                  type: number
+              required:
+              - cycle
+              - minimum_cycle_amount
+              - rate
+              - cleaning_fee
+              - user_id
+              - property_id
+    delete:
+      summary: delete hosting
+      tags:
+      - Hostings
+      description: Delete Hosting
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                succesful_logout:
+                  value:
+                    code: 202
+                    data:
+                      message: Hosting delete successfully   
+  "/api/v1/properties":
+    get:
+      summary: list properties
+      tags:
+      - Properties
+      description: Retrieves all Properties
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - name: Property name
+                      description: Property description
+                      guest_capacity: 2
+                      bedrooms: 1
+                      beds: 2
+                      bathrooms: 2
+                      kind: apartment
+                      size: 120
+          
+    post:
+      summary: create property
+      tags:
+      - Properties
+      description: Create a new Property
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                guest_capacity:
+                  type: integer
+                bedrooms:
+                  type: integer
+                beds:
+                  type: integer
+                bathrooms:
+                  type: integer
+                kind:
+                  type: string
+                size:
+                  type: integer
+              required:
+              - name
+              - description
+              - guest_capacity
+              - bedrooms
+              - beds
+              - bathrooms
+              - kind
+              - size
+  "/api/v1/properties/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show property
+      tags:
+      - Properties
+      description: Show all Properties
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - Id: 3
+                      name: Property name
+                      description: Property description
+                      guest_capacity: 2
+                      bedrooms: 1
+                      beds: 2
+                      bathrooms: 2
+                      kind: apartment
+                      size: 120
+                      created_at: "2022-11-09T21:37:35.472Z"
+                      updated_at: "2022-11-09T21:37:35.472Z"
+      
+      
+
+
+
+          
+    patch:
+      summary: update property
+      tags:
+      - Properties
+      description: Edit Property
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                guest_capacity:
+                  type: integer
+                bedrooms:
+                  type: integer
+                beds:
+                  type: integer
+                bathrooms:
+                  type: integer
+                kind:
+                  type: string
+                size:
+                  type: integer
+              required:
+              - name
+              - description
+              - guest_capacity
+              - bedrooms
+              - beds
+              - bathrooms
+              - kind
+              - size
+    put:
+      summary: update property
+      tags:
+      - Properties
+      description: Edit Property
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                guest_capacity:
+                  type: integer
+                bedrooms:
+                  type: integer
+                beds:
+                  type: integer
+                bathrooms:
+                  type: integer
+                kind:
+                  type: string
+                size:
+                  type: integer
+              required:
+              - name
+              - description
+              - guest_capacity
+              - bedrooms
+              - beds
+              - bathrooms
+              - kind
+              - size
+    delete:
+      summary: delete property
+      tags:
+      - Properties
+      description: Delete Property
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                succesful_logout:
+                  value:
+                    code: 202
+                    data:
+                      message: Property delete successfully   
+  "/api/v1/property_images":
+    get:
+      summary: list property_images
+      tags:
+      - Property_images
+      description: Retrieves all Property_images
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - source: "https://es.wikipedia.org/wiki/Isla_de_Margarita#/media/Archivo:IslaBonitaMargarita.jpg"
+                      property_id: 1
+                      created_at: "2022-11-09T16:41:13.255Z"
+                      updated_at: "2022-11-09T16:41:13.255Z"
+    post:
+      summary: create property_image
+      tags:
+      - Property_images
+      description: Create a new Property_image
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+                property_id:
+                  type: integer
+              required:
+              - source
+              - property_id
+  "/api/v1/property_images/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show property_image
+      tags:
+      - Property_images
+      description: Show all Property_images
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - source: url Photo
+                      property_id: 1
+    patch:
+      summary: update property_image
+      tags:
+      - Property_images
+      description: Edit Property_images
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+                property_id:
+                  type: integer
+              required:
+              - source
+              - property_id
+    put:
+      summary: update property_image
+      tags:
+      - Property_images
+      description: Edit Property_images
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: string
+                property_id:
+                  type: integer
+              required:
+              - source
+              - property_id
+    delete:
+      summary: delete property_image
+      tags:
+      - Property_images
+      description: Delete Property_images
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                succesful_logout:
+                  value:
+                    code: 202
+                    data:
+                      message: Property_images delete successfully   
+  "/api/v1/reservations":
+    get:
+      summary: list reservations
+      tags:
+      - Reservations
+      description: Retrieves all Reservations
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - guests: number of guests
+                      check_in: "2022-12-10"
+                      check_out: "2022-12-25"
+                      price: 100
+                      user_id: 2
+                      hosting_id: 4
+    post:
+      summary: create reservation
+      tags:
+      - Reservations
+      description: Create a new Reservation
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                guests:
+                  type: integer
+                check_in:
+                  type: integer
+                check_out:
+                  type: integer
+                price:
+                  type: integer
+                user_id:
+                  type: integer
+                hosting_id:
+                  type: integer
+              required:
+              - guests
+              - check_in
+              - check_out
+              - price
+              - user_id
+              - hosting_id
+  "/api/v1/reservations/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show reservation
+      tags:
+      - Reservations
+      description: Show all Reservations
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - Id: 2
+                      guests: number of guests
+                      check_in: "2022-12-10"
+                      check_out: "2022-12-25"
+                      price: 100
+                      user_id: 2
+                      hosting_id: 4   
+                      created_at: "2022-11-09T16:41:13.255Z"
+                      updated_at: "2022-11-09T16:41:13.255Z"     
+    
+    delete:
+      summary: delete reservation
+      tags:
+      - Reservations
+      description: Delete Reservation
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                succesful_logout:
+                  value:
+                    code: 202
+                    data:
+                      message: reservation delete successfully   
+  "/api/v1/users":
+    #get:
+      #summary: list users
+      #tags:
+     # - Users
+      #description: Retrieves all Users
+      #responses:
+       # '200':
+         # description: successful
+         # content:
+           # application/json:
+            #  examples:
+              #  successful:
+               #   value:
+                 #   success: true
+                  #  data:
+                   # - name: User Name
+                  #    Email: User email
+                    #  password: User password
+
+              
+    post:
+      summary: create user
+      tags:
+      - Users
+      description: Create a new User
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - email
+              - password
+  "/api/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      tags:
+      - Users
+      description: Show all Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    success: true
+                    data:
+                    - Id: 4
+                      name: User Name
+                      Email: User email
+                      password: User password 
+                      created_at: "2022-11-09T16:41:13.255Z"
+                      updated_at: "2022-11-09T16:41:13.255Z"    
+    patch:
+      summary: update user
+      tags:
+      - Users
+      description: Edit User
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - email
+              - password_digest
+    put:
+      summary: update user
+      tags:
+      - Users
+      description: Edit User
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - email
+              - password_digest
+    delete:
+      summary: delete user
+      tags:
+      - Users
+      description: Delete User
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                succesful_logout:
+                  value:
+                    code: 202
+                    data:
+                      message: User delete successfully      
+servers:
+- url: http://[::1]:3000
+  variables:
+    defaultHost:
+      default: http://[::1]:3000

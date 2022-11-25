@@ -1,0 +1,61 @@
+format for create Property API
+{
+    "name": "paloaltotest",
+"description": "2 floor house",
+"guest_capacity": 2,
+"bedrooms": 3,
+"beds": 4,
+"baths": 1,
+"size": 100,
+"kind": "house",
+"address": {
+ "street": "23th",
+ "city": "mogadishu",
+ "country": "somalia",
+ "zip_code": "111111",
+ "number": 1,
+ "continent": "Africa"
+ },
+      "categories": ["beachfront", "mansions"]
+   }
+
+format for create Address API
+{
+    "street": "35th street",
+    "number": 123,
+    "city": "Australia",
+    "country": "Sidney",
+    "zip_code": "45678",
+
+}
+format for create Property images API
+ {
+"source": "https://es.wikipedia.org/wiki/Isla_de_Margarita#/media/Archivo:IslaBonitaMargarita.jpg",
+      "property_id": 3
+}
+format for create Hosting API
+{
+"cycle": 2,
+"minimum_cycle_amount": 4,
+"rate": 60,
+"public": true,
+"cleaning_fee": 1,
+"user_id": 2,
+"property_id": 3
+}
+format for create reservations API
+{
+ "check_in": "2022-11-05",
+ "check_out": "2022-11-06",
+ "guests": 1,
+ "user_id": 1,
+ "hosting_id": 4,
+ "price": 200
+}
+
+format for create blocked_periods API
+{
+    "start_date": "2021-01-02",
+    "end_date": "2021-01-01",
+    "property_id": 16
+    }
