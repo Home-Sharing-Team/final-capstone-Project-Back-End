@@ -22,10 +22,10 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://[::1]:3000',
+          url: 'https://morning-garden-46493.herokuapp.com',
           variables: {
             defaultHost: {
-              default: 'http://[::1]:3000'
+              default: 'https://morning-garden-46493.herokuapp.com'
             }
           }
         }
